@@ -22,29 +22,49 @@
     clock.textContent = new Date().toLocaleTimeString('pt-BR');
   }, 1000);
 
-  // Contador de Visitantes Real via API com Fallback
+  // Contador de Visitantes Real Resiliente (Com fallback de APIs)
   (function fetchRealVisits() {
     const countEl = document.getElementById('count');
-    const namespace = "mayumiware";
-    const key = "portfolio-visits";
+    if (!countEl) return;
 
+    const namespace = "mayumiware-portfolio";
+    const key = "total-visits";
+
+    // Função de formatação
+    function setDigits(num) {
+      countEl.textContent = String(num).padStart(6, '0');
+    }
+
+    // Tentativa 1: CountAPI Principal
     fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-      .then(response => response.json())
+      .then(res => {
+        if (!res.ok) throw new Error("Erro na API principal");
+        return res.json();
+      })
       .then(data => {
-        if (countEl && data.value) {
-          countEl.textContent = String(data.value).padStart(6, '0');
+        if (data && data.value) {
+          setDigits(data.value);
+        } else {
+          throw new Error("Resposta inválida");
         }
       })
-      .catch(error => {
-        // Fallback local caso a API esteja indisponível
-        var visits = 1;
-        try {
-          visits = parseInt(localStorage.getItem('site_visits') || '0', 10) + 1;
-          localStorage.setItem('site_visits', visits);
-        } catch(e) {
-          visits = 1;
-        }
-        if (countEl) countEl.textContent = String(visits).padStart(6, '0');
+      .catch(() => {
+        // Tentativa 2: API Secundária (CounterAPI)
+        fetch(`https://counterapi.com/api/${namespace}/view`)
+          .then(res => res.json())
+          .then(data => {
+            if (data && data.value) {
+              setDigits(data.value);
+            } else {
+              throw new Error("Erro na API secundária");
+            }
+          })
+          .catch(() => {
+            // Tentativa 3: Fallback de persistência local + valor base fictício/acumulado
+            let visits = parseInt(localStorage.getItem('site_visits') || '12', 10) + 1;
+            localStorage.setItem('site_visits', visits);
+            setDigits(visits);
+          });
       });
   })();
 
