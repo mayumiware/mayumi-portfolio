@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MAYUMI SPACE</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" href="assets/profile/iconsite.png">
+</head>
+<body class="vhs">
+
+<div class="site">
+  <!-- Cabeçalho -->
+  <header class="box" >
+    <h1 onclick="playGlitchSound()" title="Clique para som de glitch!" style="user-select: none;">Bem-vindo(a)!</h1>
+  </header>
+
+  <!-- Banner Synthwave -->
+  <div class="banner" role="img" aria-label="Banner synthwave com sol listrado e grade de neon">
+    <div class="sun"></div>
+    <div class="floor"></div>
+  </div>
+
+  <!-- Ticker Noticioso Retrô -->
+  <div class="ticker">
+    <span>*** Estudando Ciência da Computação e Segurança Cibernética  *** Manutenção de dispositivos eletrônicos *** Programação Web retrô ***</span>
+    <em id="clock">--:--:--</em>
+  </div>
+
+  <!-- Menu de Navegação e Perfil -->
+  <nav class="box" aria-label="Menu principal">
+    <h2>Navegação</h2>
+    <ul>
+      <li><button data-go="sobre" aria-current="true" onclick="playClickSound()" onmouseenter="playHoverSound()">Sobre mim</button></li>
+      <li><button data-go="cursos" onclick="playClickSound()" onmouseenter="playHoverSound()">Cursos</button></li>
+      <li><button data-go="experiencias" onclick="playClickSound()" onmouseenter="playHoverSound()">Experiências</button></li>
+      <li><button data-go="fotos" onclick="playClickSound()" onmouseenter="playHoverSound()">Fotos de Campo</button></li>
+      <li><button data-go="projetos" onclick="playClickSound()" onmouseenter="playHoverSound()">Projetos</button></li>
+      <li><button data-go="mural" onclick="playClickSound()" onmouseenter="playHoverSound()">Mural</button></li>
+    </ul>
+
+    <h2>Perfil</h2>
+    <div class="in">
+      <div class="avatar-box" onclick="openModal('assets/profile/Umi.png', '[ Cíntia Mayumi - Foto de Perfil ]')" onmouseenter="playHoverSound()">
+        <img src="assets/profile/Umi.png" alt="Cíntia Mayumi" onerror="this.src='https://placehold.co/130x130/170a2b/ffc400?text=Mayumi';">
+      </div>
+    </div>
+
+    <h2>My Icon</h2>
+    <div class="in">
+      <div class="avatar-box" style="width: 90px; height: 90px;" onclick="openModal('assets/profile/iconsite.png', '[ Tech Cat - Ícone do Site ]')" onmouseenter="playHoverSound()">
+        <img src="assets/profile/iconsite.png" alt="Ícone Gato Tech" onerror="this.src='https://placehold.co/90x90/170a2b/05f2ff?text=TechCat';">
+      </div>
+    </div>
+
+    <div class="in">
+      <button class="btn" id="vhs" type="button" style="width: 100%;" onmouseenter="playHoverSound()">Efeito VHS: ligado</button>
+    </div>
+  </nav>
+
+  <!-- Conteúdo Principal -->
+  <main class="box">
+    <!-- Sobre Mim -->
+    <section id="sobre" class="on">
+      <h2>Seção » Perfil &amp; Foco</h2>
+      <div class="in">
+        <h2 class="big">Sobre mim</h2>
+        <img src="assets/profile/abra-a-mente-removebg-preview.png" class="center-img"><br>
+        <p>Olá! Sou Cíntia Mayumi, uma pessoa curiosa que adora desmontar coisas e explorar as possibilidades da tecnologia.</p><br>
+        <p><b>Foco Operacional:</b> Cibersegurança, forense digital e manutenção de hardware.</p>
+      </div>
+    </section>
+
+    <!-- Cursos -->
+    <section id="cursos">
+      <h2>Seção » Cursos &amp; Treinamentos</h2>
+      <div class="in">
+        <h2 class="big">Cursos &amp; Certificações</h2>
+        <h3 style="color: var(--cyan); margin-top: 10px;">Hardware &amp; Eletrônica:</h3>
+        <ul class="l">
+          <li>Manutenção de Celulares — CEPEP</li>
+          <li>Reparo de Placas — TECCEL</li>
+          <li>Eletrônica Básica e Avançada (2 Cursos) — TV TECH</li>
+          <li>Manutenção, Montagem de Computadores e Redes Locais — CEPEP</li>
+        </ul>
+        <h3 style="color: var(--cyan); margin-top: 10px;">Software &amp; Bancos de Dados:</h3>
+        <ul class="l">
+          <li>Python para Iniciantes — Fundação Bradesco</li>
+          <li>MySQL Básico — Curso em Vídeo</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Experiências -->
+    <section id="experiencias">
+      <h2>Seção » Experiência Prática</h2>
+      <div class="in">
+        <h2 class="big">Trabalho de Campo &amp; Manutenção</h2>
+        <ul class="l">
+          <li><b>Reparo em iPhone (2025) - autônomo:</b> Diagnóstico e microrreparo em dispositivo Apple.</li>
+          <li><b>Preventiva de Laptop (2025) - autônomo:</b> Manutenção preventiva, formatação de laptops e substituição de bateria.</li>
+          <li><b>Montagem &amp; Configuração de PC (2026) - autônomo:</b> Montagem de computador e instalação completa de sistema.</li>
+          <li><b>Reparo em Smartphone (2026) - autônomo:</b> Reposição de tela e manutenção em dispositivo Android.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Fotos de Campo -->
+    <section id="fotos">
+      <h2>Galeria » Fotos de Campo &amp; Evidências</h2>
+      <div class="in">
+        <h2 class="big">Evidências Técnicas de Bancada</h2>
+        <p>Registros de diagnósticos e reparos em laboratório (clique para ampliar):</p>
+        <div class="field-photos-grid">
+          <div class="photo-card" onclick="openModal('assets/evidence/reparo-placa-smartphone.jpeg', '[01] Reparo de Placa de Smartphone')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/reparo-placa-smartphone.jpeg" alt="Reparo Smartphone" onerror="this.src='https://placehold.co/300x200/0a0612/05f2ff?text=Smartphone+Repair';">
+            <div class="photo-caption">[01] Placa Smartphone</div>
+          </div>
+          <div class="photo-card" onclick="openModal('assets/evidence/instalacao-windows-11.jpeg', '[02] Instalação do Windows 11')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/instalacao-windows-11.jpeg" alt="Windows 11 Setup" onerror="this.src='https://placehold.co/300x200/0a0612/ff2a6d?text=Windows+11';">
+            <div class="photo-caption">[02] Instalação Win 11</div>
+          </div>
+          <div class="photo-card" onclick="openModal('assets/evidence/reparo-placa-eletronica.jpeg', '[03] Análise de Placa Eletrônica')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/reparo-placa-eletronica.jpeg" alt="Placa Eletronica" onerror="this.src='https://placehold.co/300x200/0a0612/ffc400?text=Electronic+Board';">
+            <div class="photo-caption">[03] Placa Eletrônica</div>
+          </div>
+          <div class="photo-card" onclick="openModal('assets/evidence/manutencao-placa-notebook.jpeg', '[04] Manutenção de Placa de Notebook')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/manutencao-placa-notebook.jpeg" alt="Notebook Repair" onerror="this.src='https://placehold.co/300x200/0a0612/7a00ff?text=Notebook+Board';">
+            <div class="photo-caption">[04] Placa Notebook</div>
+          </div>
+          <div class="photo-card" onclick="openModal('assets/evidence/manutencao-placa-tv.jpeg', '[05] Manutenção de Placa de TV')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/manutencao-placa-tv.jpeg" alt="Placa TV" onerror="this.src='https://placehold.co/300x200/0a0612/05f2ff?text=TV+Board';">
+            <div class="photo-caption">[05] Placa de TV</div>
+          </div>
+          <div class="photo-card" onclick="openModal('assets/evidence/manutencao-computador.jpeg', '[06] Manutenção de Computador')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/manutencao-computador.jpeg" alt="PC Repair" onerror="this.src='https://placehold.co/300x200/0a0612/ff2a6d?text=PC+Maintenance';">
+            <div class="photo-caption">[06] Manutenção PC</div>
+          </div>
+        </div>
+        <div style="margin-top: 8px;">
+          <div class="photo-card" onclick="openModal('assets/evidence/bancada-tecnica-eletronica.jpeg', '[07] Bancada Técnica de Eletrônica')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/bancada-tecnica-eletronica.jpeg" alt="Bancada Eletronica" onerror="this.src='https://placehold.co/300x200/0a0612/ffc400?text=Electronics+Bench';">
+            <div class="photo-caption">[07] Bancada Técnica de Eletrônica</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projetos -->
+    <section id="projetos">
+      <h2>Seção » Projetos</h2>
+      <div class="in">
+        <h2 class="big">Projetos em Andamento</h2>
+        <div class="grid">
+          <div class="card" style="grid-column: 1 / -1;">
+            <h3>[Blue Day App]</h3>
+            <p>Aplicativo móvel simples para gerenciamento de tarefas diárias. Arquitetura offline-first com backup local criptografado em AES-256.</p>
+            <p><a href="https://hibiscotropical.github.io/BlueDay/www/" target="_blank" rel="noopener" onclick="playClickSound()" onmouseenter="playHoverSound()">» Acessar o aplicativo em execução</a></p>
+            <span class="tag">Cordova</span>
+            <span class="tag">Framework7</span>
+            <span class="tag">AES-256</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Mural -->
+    <section id="mural">
+      <h2>Seção » Mural Pessoal</h2>
+      <div class="in">
+        <h2 class="big">O que me faz ter ânsia por viver?</h2>
+        <p>Um espaço dedicado às coisas que mais amo fazer (clique nas imagens para ampliar):</p>
+        <div class="field-photos-grid">
+          <div class="photo-card" onclick="openModal('assets/evidence/minha-visao.png', '[01] Hobbies &amp; Paixões')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/minha-visao.png" alt="Hobbie 1" onerror="this.src='https://placehold.co/300x200/170a2b/ffc400?text=Hobbie+1';">
+            <div class="photo-caption">[01] Paixão &amp; Hobbies</div>
+          </div>
+          <div class="photo-card" onclick="openModal('assets/evidence/reparo-placa.png', '[02] Caçando curtos')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/reparo-placa.png" alt="Hobbie 2" onerror="this.src='https://placehold.co/300x200/170a2b/05f2ff?text=Hobbie+2';">
+            <div class="photo-caption">[02] Caçando curtos</div>
+          </div>
+          <div class="photo-card" onclick="openModal('assets/evidence/reparor-fonte.png', '[03] Consertar e aprender')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/reparor-fonte.png" alt="Hobbie 2" onerror="this.src='https://placehold.co/300x200/170a2b/05f2ff?text=Hobbie+3';">
+            <div class="photo-caption">[03] Consertar e aprender</div>
+          </div>
+          <div class="photo-card" onclick="openModal('assets/evidence/reparo-socket-cpu.png', '[04] Precisão e persistência')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/reparo-socket-cpu.png" alt="Hobbie 2" onerror="this.src='https://placehold.co/300x200/170a2b/05f2ff?text=Hobbie+2';">
+            <div class="photo-caption">[04] Precisão e persistência</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Barra Lateral Direita -->
+  <aside>
+    <div class="box" style="margin-bottom:6px">
+      <h3>Faculdades</h3>
+      <div class="in">
+        <div>• Ciência da Computação<br><small style="color: var(--cyan)">Univ. Farias Brito</small> <span class="tag">cursando</span></div>
+        <div style="margin-top:6px">• Cibersegurança<br><small style="color: var(--cyan)">Univ. de Fortaleza</small> <span class="tag">cursando</span></div>
+      </div>
+    </div>
+
+    <div class="box" style="margin-bottom:6px">
+      <h3>Habilidades</h3>
+      <div class="in">
+        <ul class="l">
+          <li>Reparo de hardware</li>
+          <li>Soldagem e eletrônica</li>
+          <li>ExifTool básico</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="box" style="margin-bottom:6px">
+      <h3>Redes Sociais</h3>
+      <div class="in">
+        <p>• <a href="https://github.com/mayumiware" target="_blank" rel="noopener" onclick="playClickSound()" onmouseenter="playHoverSound()">GitHub</a></p>
+        <p>• <a href="https://www.linkedin.com/in/c%C3%ADntia-mayumi-o-m-1b876a3b6/" target="_blank" rel="noopener" onclick="playClickSound()" onmouseenter="playHoverSound()">LinkedIn</a></p>
+      </div>
+    </div>
+
+    <div class="box">
+      <h3>Visitantes</h3>
+      <div class="in">
+        <div class="counter" id="count">000000</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Rodapé -->
+  <footer class="box">
+    Atualizado em 2026-11-08 · Cíntia Mayumi Portfólio
+  </footer>
+</div>
+
+<!-- Modal Retrô com Zoom -->
+<div id="retroModal" class="retro-modal" onclick="closeModalOnOuterClick(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span id="modalTitle">// IMAGE_VIEWER.EXE</span>
+      <div>
+        <button class="modal-zoom-btn" onclick="toggleZoom()" title="Alternar Zoom" onmouseenter="playHoverSound()">[ 🔍 ZOOM ]</button>
+        <span class="modal-close" onclick="closeModal()" onmouseenter="playHoverSound()">[ X ]</span>
+      </div>
+    </div>
+    <div class="modal-img-container" onclick="toggleZoom()">
+      <img id="modalImage" src="" alt="Ampliada">
+    </div>
+    <div id="modalCaption" class="modal-caption"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
