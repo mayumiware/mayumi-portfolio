@@ -12,7 +12,7 @@
 
 <div class="site">
   <!-- Cabeçalho -->
-  <header class="box" >
+  <header class="box">
     <h1 onclick="playGlitchSound()" title="Clique para som de glitch!" style="user-select: none;">Bem-vindo(a)!</h1>
   </header>
 
@@ -193,7 +193,7 @@
     </section>
   </main>
 
-<!-- Barra Lateral Direita -->
+  <!-- Barra Lateral Direita -->
   <aside>
     <div class="box" style="margin-bottom:6px">
       <h3>Faculdades</h3>
@@ -222,6 +222,25 @@
       </div>
     </div>
 
+<!-- Player de Áudio Retrô via Iframe (Karl Casey - Hackers) -->
+<div class="box" style="margin-bottom:6px">
+  <h3>Trilha Sonora // OST</h3>
+  <div class="in">
+    <p style="font-size: 14px; margin-bottom: 6px; color: var(--yellow);">» Hackers - Karl Casey (White Bat Audio)</p>
+    <div class="synthwave-player-container">
+      <iframe 
+        width="100%" 
+        height="120" 
+        src="https://www.youtube-nocookie.com/embed/NZ4Of3lID84?autoplay=1" 
+        title="Karl Casey - Hackers" 
+        style="border:0;" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>
+
     <div class="box">
       <h3>Visitantes</h3>
       <div class="in">
@@ -230,12 +249,11 @@
     </div>
   </aside>
 
-  <!-- Rodapé (agora perfeitamente dentro da div .site) -->
+  <!-- Rodapé -->
   <footer class="box">
     Atualizado em 2026-11-08 · Cíntia Mayumi Portfólio
   </footer>
-
-</div> <!-- Fim da div .site -->
+</div>
 
 <!-- Modal Retrô com Zoom -->
 <div id="retroModal" class="retro-modal" onclick="closeModalOnOuterClick(event)">
