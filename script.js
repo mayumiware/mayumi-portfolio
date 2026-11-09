@@ -1,82 +1,125 @@
-(function(){
-  // Navegação por Hash / Abas
-  var btns = document.querySelectorAll('[data-go]');
-  var secs = document.querySelectorAll('main section');
-
-  function show(id){
-    if(!document.getElementById(id)) id = 'sobre';
-    secs.forEach(function(s){ s.classList.toggle('on', s.id === id); });
-    btns.forEach(function(b){ b.setAttribute('aria-current', b.dataset.go === id); });
+// --- Relógio do Ticker Retrô ---
+function updateClock() {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  const clockEl = document.getElementById('clock');
+  if (clockEl) {
+    clockEl.textContent = `${hours}:${minutes}:${seconds}`;
   }
+}
+setInterval(updateClock, 1000);
+updateClock();
 
-  btns.forEach(function(b){
-    b.addEventListener('click', function(){ location.hash = b.dataset.go; });
+// --- Navegação entre Seções ---
+const navButtons = document.querySelectorAll('nav button[data-go]');
+const sections = document.querySelectorAll('main section');
+
+navButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const targetId = btn.getAttribute('data-go');
+    
+    sections.forEach(sec => sec.classList.remove('on'));
+    const targetSection = document.getElementById(targetId);
+    if (targetSection) targetSection.classList.add('on');
+
+    navButtons.forEach(b => b.removeAttribute('aria-current'));
+    btn.setAttribute('aria-current', 'true');
   });
+});
 
-  window.addEventListener('hashchange', function(){ show(location.hash.slice(1)); });
-  show(location.hash.slice(1));
-
-  // Relógio em tempo real
-  var clock = document.getElementById('clock');
-  setInterval(function(){
-    clock.textContent = new Date().toLocaleTimeString('pt-BR');
-  }, 1000);
-
-  // Contador de Visitantes Real Resiliente (Com fallback de APIs)
-  (function fetchRealVisits() {
+// --- Contador de Visitantes Real (CountAPI) ---
+fetch('https://api.countapi.xyz/hit/mayumiware-portfolio/visits')
+  .then(res => res.json())
+  .then(data => {
     const countEl = document.getElementById('count');
-    if (!countEl) return;
-
-    const namespace = "mayumiware-portfolio";
-    const key = "total-visits";
-
-    function setDigits(num) {
-      countEl.textContent = String(num).padStart(6, '0');
+    if (countEl && data && typeof data.value !== 'undefined') {
+      countEl.textContent = String(data.value).padStart(6, '0');
+    } else {
+      throw new Error();
     }
-
-    // Tentativa 1: CountAPI Principal
-    fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-      .then(res => {
-        if (!res.ok) throw new Error("Erro na API principal");
-        return res.json();
-      })
-      .then(data => {
-        if (data && data.value) {
-          setDigits(data.value);
-        } else {
-          throw new Error("Resposta inválida");
-        }
-      })
-      .catch(() => {
-        // Tentativa 2: CounterAPI Secundária
-        fetch(`https://counterapi.com/api/${namespace}/view`)
-          .then(res => res.json())
-          .then(data => {
-            if (data && data.value) {
-              setDigits(data.value);
-            } else {
-              throw new Error("Erro na API secundária");
-            }
-          })
-          .catch(() => {
-            // Tentativa 3: Fallback local
-            let visits = parseInt(localStorage.getItem('site_visits') || '12', 10) + 1;
-            localStorage.setItem('site_visits', visits);
-            setDigits(visits);
-          });
-      });
-  })();
-
-  // Alternador do Efeito VHS
-  var vhs = document.getElementById('vhs');
-  vhs.addEventListener('click', function(){
-    playClickSound();
-    var on = document.body.classList.toggle('vhs');
-    vhs.textContent = 'Efeito VHS: ' + (on ? 'ligado' : 'desligado');
+  })
+  .catch(() => {
+    const countEl = document.getElementById('count');
+    if (countEl) countEl.textContent = '001337';
   });
-})();
 
-/* Sintetizador de Efeitos Sonoros com Web Audio API */
+// --- Modal 1: Imagem com Zoom ---
+const modal = document.getElementById('retroModal');
+const modalImage = document.getElementById('modalImage');
+const modalCaption = document.getElementById('modalCaption');
+const modalImgContainer = document.querySelector('.modal-img-container');
+
+function openModal(src, captionText) {
+  if (modal && modalImage) {
+    modalImage.src = src;
+    if (modalCaption) modalCaption.textContent = captionText;
+    modal.style.display = 'flex';
+    modalImgContainer.classList.remove('zoomed');
+  }
+}
+
+function closeModal() {
+  if (modal) {
+    modal.style.display = 'none';
+    if (modalImage) modalImage.src = '';
+  }
+}
+
+function closeModalOnOuterClick(event) {
+  if (event.target === modal) {
+    closeModal();
+  }
+}
+
+function toggleZoom() {
+  if (modalImgContainer) {
+    modalImgContainer.classList.toggle('zoomed');
+  }
+}
+
+// --- Modal 2: Notícias (Cybersec Brazil) ---
+const newsModal = document.getElementById('newsModal');
+
+function openNewsModal() {
+  if (newsModal) {
+    newsModal.style.display = 'flex';
+    playClickSound();
+  }
+}
+
+function closeNewsModal() {
+  if (newsModal) {
+    newsModal.style.display = 'none';
+  }
+}
+
+function closeNewsModalOnOuterClick(event) {
+  if (event.target === newsModal) {
+    closeNewsModal();
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeModal();
+    closeNewsModal();
+  }
+});
+
+// --- Alternador de Efeito VHS ---
+const vhsBtn = document.getElementById('vhs');
+if (vhsBtn) {
+  vhsBtn.addEventListener('click', () => {
+    document.body.classList.toggle('vhs');
+    const isVhsOn = document.body.classList.contains('vhs');
+    vhsBtn.textContent = `Efeito VHS: ${isVhsOn ? 'ligado' : 'desligado'}`;
+    playClickSound();
+  });
+}
+
+// --- Web Audio API para Efeitos Sonoros Retrô ---
 let audioCtx = null;
 function initAudio() {
   if (!audioCtx) {
@@ -87,97 +130,206 @@ function initAudio() {
 function playClickSound() {
   try {
     initAudio();
-    if (!audioCtx) return;
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
     osc.type = 'square';
     osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.06);
+    osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.05);
     gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.06);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
     osc.connect(gain);
     gain.connect(audioCtx.destination);
     osc.start();
-    osc.stop(audioCtx.currentTime + 0.06);
-  } catch (e) {}
+    osc.stop(audioCtx.currentTime + 0.05);
+  } catch(e) {}
 }
 
 function playHoverSound() {
   try {
     initAudio();
-    if (!audioCtx) return;
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
     osc.type = 'sine';
-    osc.frequency.setValueAtTime(240, audioCtx.currentTime);
+    osc.frequency.setValueAtTime(220, audioCtx.currentTime);
     gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
     osc.connect(gain);
     gain.connect(audioCtx.destination);
     osc.start();
     osc.stop(audioCtx.currentTime + 0.03);
-  } catch (e) {}
+  } catch(e) {}
 }
 
 function playGlitchSound() {
   try {
     initAudio();
-    if (!audioCtx) return;
-    for (let i = 0; i < 3; i++) {
+    for(let i=0; i<4; i++) {
       setTimeout(() => {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(180 + Math.random() * 500, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+        osc.frequency.setValueAtTime(100 + Math.random()*800, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.04);
-      }, i * 35);
+        osc.stop(audioCtx.currentTime + 0.08);
+      }, i * 40);
     }
-  } catch (e) {}
+  } catch(e) {}
 }
 
-/* Modal de Visualização de Imagens */
-function openModal(imageSrc, captionText) {
+// --- WIDGET 1: Winamp Player Controls ---
+function playerAction(action) {
+  const iframe = document.getElementById('youtubePlayer');
+  if (!iframe) return;
+  
+  if (action === 'play') {
+    iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+  } else if (action === 'pause') {
+    iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+  } else if (action === 'restart') {
+    iframe.contentWindow.postMessage('{"event":"command","func":"seekTo","args":[0, true]}', '*');
+    iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+  }
   playClickSound();
-  const modal = document.getElementById("retroModal");
-  const modalImg = document.getElementById("modalImage");
-  const caption = document.getElementById("modalCaption");
-  const container = document.querySelector('.modal-img-container');
+}
 
-  if (modal && modalImg && caption) {
-    modalImg.src = imageSrc;
-    caption.textContent = captionText;
-    if (container) container.classList.remove('zoomed');
-    modal.style.display = "flex";
+// --- WIDGET 2: Tamagotchi Cyber Pet (Expressões Dinâmicas) ---
+let petHunger = 50;
+let petMood = '😀';
+const petFaces = {
+  happy: ['(>^ω^<)', '(•ω•)', '(=^‥^=)'],
+  love: ['(｡♥‿♥｡)', '(✿ ♥‿♥)', '(˘⌣˘ʃƪ)'],
+  hungry: ['(°ロ°)', '(¬_¬)', '(-_-)'],
+  party: ['(ﾉ◕ヮ◕)ﾉ*✧', ' \\(^ヮ^)/ ']
+};
+
+function updatePetDisplay() {
+  const statusEl = document.getElementById('petStatus');
+  const faceEl = document.getElementById('petFace');
+  if (statusEl && faceEl) {
+    statusEl.textContent = `Fome: ${petHunger}% | Humor: ${petMood}`;
+    
+    let list = petFaces.happy;
+    if (petHunger > 70) {
+      list = petFaces.hungry;
+    } else if (petMood === '🎉') {
+      list = petFaces.party;
+    } else if (petMood === '😍' || petMood === '😎') {
+      list = petFaces.love;
+    }
+    const randomFace = list[Math.floor(Math.random() * list.length)];
+    faceEl.textContent = randomFace;
   }
 }
 
-function closeModal() {
-  const modal = document.getElementById("retroModal");
-  if (modal && modal.style.display === "flex") {
+function feedPet() {
+  petHunger = Math.max(0, petHunger - 25);
+  petMood = petHunger < 30 ? '😍' : '😎';
+  updatePetDisplay();
+  playClickSound();
+}
+
+function playPet() {
+  petMood = '🎉';
+  petHunger = Math.min(100, petHunger + 10);
+  updatePetDisplay();
+  playClickSound();
+}
+
+setInterval(() => {
+  if (petHunger < 100) petHunger += 2;
+  if (petHunger > 80) petMood = '😭';
+  updatePetDisplay();
+}, 15000);
+
+// --- ASSISTENTE VIRTUAL FLUTUANTE ---
+const tips = [
+  '🤖 "Sabia que você pode clicar em qualquer foto de campo para ampliá-la com zoom?"',
+  '🤖 "Teste o efeito VHS no menu lateral para alternar o visual retrô!"',
+  '🤖 "Interaja com o Tamagotchi para mantê-lo feliz e saudável!"',
+  '🤖 "Não deixe de assinar o livro de visitas com persistência local!"',
+  '🤖 "Dê um play na trilha sonora de Karl Casey para curtir o som!"'
+];
+
+function assistantTip() {
+  const assistantEl = document.getElementById('virtualAssistantText');
+  if (assistantEl) {
+    const randomTip = tips[Math.floor(Math.random() * tips.length)];
+    assistantEl.textContent = randomTip;
+  }
+  playClickSound();
+}
+
+function toggleAssistant() {
+  const body = document.querySelector('.floating-assistant .assistant-body');
+  const btn = document.querySelector('.assistant-toggle-btn');
+  if (body && btn) {
+    if (body.style.display === 'none') {
+      body.style.display = 'block';
+      btn.textContent = '[ _ ]';
+    } else {
+      body.style.display = 'none';
+      btn.textContent = '[ + ]';
+    }
+  }
+  playClickSound();
+}
+
+// --- WIDGET 4: Livro de Visitas (Guestbook) com Persistência (localStorage) ---
+const GUESTBOOK_KEY = 'mayumi_space_guestbook';
+
+function loadGuestbook() {
+  const container = document.getElementById('guestbookMessages');
+  if (!container) return;
+
+  const savedMessages = JSON.parse(localStorage.getItem(GUESTBOOK_KEY)) || [];
+  
+  if (savedMessages.length === 0) {
+    container.innerHTML = '<div style="color: var(--yellow);">[Sistema]: Deixe seu recado!</div>';
+  } else {
+    container.innerHTML = '';
+    savedMessages.forEach(item => {
+      const entry = document.createElement('div');
+      entry.style.marginTop = '4px';
+      entry.innerHTML = `<b style="color: var(--pink);">${escapeHtml(item.name)}:</b> <span style="color: var(--text);">${escapeHtml(item.msg)}</span>`;
+      container.appendChild(entry);
+    });
+    container.scrollTop = container.scrollHeight;
+  }
+}
+
+function signGuestbook() {
+  const nameInput = document.getElementById('guestName');
+  const msgInput = document.getElementById('guestMsg');
+  
+  if (nameInput && msgInput) {
+    const name = nameInput.value.trim() || 'Anônimo';
+    const msg = msgInput.value.trim();
+    
+    if (!msg) {
+      alert('Escreva uma mensagem para assinar!');
+      return;
+    }
+    
+    const savedMessages = JSON.parse(localStorage.getItem(GUESTBOOK_KEY)) || [];
+    savedMessages.push({ name, msg });
+    localStorage.setItem(GUESTBOOK_KEY, JSON.stringify(savedMessages));
+    
+    loadGuestbook();
+    
+    nameInput.value = '';
+    msgInput.value = '';
     playClickSound();
-    modal.style.display = "none";
-    const container = document.querySelector('.modal-img-container');
-    if (container) container.classList.remove('zoomed');
   }
 }
 
-function closeModalOnOuterClick(event) {
-  if (event.target.id === "retroModal") closeModal();
+function escapeHtml(text) {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
 
-document.addEventListener("keydown", function(e) {
-  if (e.key === "Escape") closeModal();
+document.addEventListener('DOMContentLoaded', () => {
+  loadGuestbook();
 });
-
-function toggleZoom() {
-  playClickSound();
-  const container = document.querySelector('.modal-img-container');
-  if (container) {
-    container.classList.toggle('zoomed');
-  }
-}
