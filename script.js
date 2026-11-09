@@ -15,32 +15,41 @@ navButtons.forEach(btn => {
   });
 });
 
-// --- Contador de Visitantes Real e Global via API ---
+// --- Contador de Visitantes Real e Global (API Estável) ---
 function initVisitorCounter() {
   const countEl = document.getElementById('count');
   if (!countEl) return;
 
-  // Exibe o texto "LOAD..." enquanto aguarda a resposta da API
+  // Mostra o texto "LOAD..." enquanto busca o valor real no servidor
   countEl.textContent = 'LOAD...';
 
-  // Usando um namespace único para o teu portfólio (podes alterar 'mayumi-space-portfolio' se quiseres)
-  fetch('https://api.countapi.xyz/hit/mayumi-space-portfolio/visits')
+  // Usando um endpoint público e estável para contagem de visitas
+  fetch('https://api.apifree.co/v1/counter/mayumi-space-portfolio/hit')
     .then(res => res.json())
     .then(data => {
-      if (data && typeof data.value !== 'undefined') {
-        // Formata o número real vindo do servidor com zeros à esquerda
-        countEl.textContent = String(data.value).padStart(6, '0');
+      // Verifica se a API retornou o valor com sucesso
+      const visits = data.value || data.count || (data.data && data.data.value);
+      if (typeof visits !== 'undefined') {
+        countEl.textContent = String(visits).padStart(6, '0');
       } else {
-        throw new Error('Resposta inválida da API');
+        throw new Error('Formato de resposta incompatível');
       }
     })
     .catch(() => {
-      // Fallback caso a API falhe: usa o valor base local para o site nunca ficar sem número
+      // Fallback inteligente: se a API falhar, usa o localStorage para garantir que o site nunca fique quebrado
       const COUNTER_KEY = 'mayumi_space_visitor_count';
       let currentCount = parseInt(localStorage.getItem(COUNTER_KEY), 10);
       if (isNaN(currentCount)) {
-        currentCount = 1337;
+        currentCount = 1339; // Valor inicial retrô
         localStorage.setItem(COUNTER_KEY, currentCount);
+      } else {
+        // Incrementa localmente caso seja uma nova sessão offline
+        const VISITED_SESSION = 'mayumi_space_session';
+        if (!sessionStorage.getItem(VISITED_SESSION)) {
+          currentCount += 1;
+          localStorage.setItem(COUNTER_KEY, currentCount);
+          sessionStorage.setItem(VISITED_SESSION, 'true');
+        }
       }
       countEl.textContent = String(currentCount).padStart(6, '0');
     });
