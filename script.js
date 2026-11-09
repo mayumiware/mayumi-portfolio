@@ -23,7 +23,7 @@ function initVisitorCounter() {
   // Exibe o texto de carregamento retrô
   countEl.textContent = 'LOAD...';
 
-  fetch('https://api.countapi.xyz/hit/mayumiware-portfolio/visits')
+  fetch('https://api.countapi.xyz/hit/mayumi-portfolio/visits')
     .then(res => res.json())
     .then(data => {
       if (data && typeof data.value !== 'undefined') {
@@ -34,7 +34,7 @@ function initVisitorCounter() {
     })
     .catch(() => {
       // Fallback clássico caso a API caia momentaneamente
-      countEl.textContent = '007777';
+      countEl.textContent = '001717';
     });
 }
 
