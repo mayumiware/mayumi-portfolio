@@ -34,7 +34,7 @@ function initVisitorCounter() {
     })
     .catch(() => {
       // Fallback clássico caso a API caia momentaneamente
-      countEl.textContent = '001337';
+      countEl.textContent = '007777';
     });
 }
 
