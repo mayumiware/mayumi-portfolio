@@ -40,6 +40,13 @@ body {
   background-image: 
     radial-gradient(circle at 20% 10%, #3a0a4a55, transparent 50%),
     radial-gradient(circle at 85% 90%, #00e5ff22, transparent 45%);
+  /* Suporte a cursor customizado com fallback */
+  cursor: url('assets/profile/cursor-synthwave.png'), auto;
+}
+
+/* Suporte a cursor de interatividade */
+a, button, .photo-card, .avatar-box, .modal-close, .modal-zoom-btn {
+  cursor: url('assets/profile/cursor-hover.png'), pointer;
 }
 
 /* Efeito CRT / VHS Scanlines no Body */
@@ -163,7 +170,7 @@ nav { grid-area: menu; }
 aside { grid-area: aside; } 
 main { grid-area: main; }
 
-/* Menu Lateral e Botões */
+/* Menu Lateral e Botões com setas retrô no hover */
 nav ul { list-style: none; margin: 0; padding: 6px; }
 nav button {
   width: 100%;
@@ -175,12 +182,17 @@ nav button {
   background: #0a0612;
   border: 2px solid var(--cyan);
   cursor: pointer;
+  transition: all 0.1s ease;
 }
 nav button:hover, nav button[aria-current=true] {
   background: var(--pink);
   border-color: var(--yellow);
   color: #fff;
   box-shadow: 3px 3px 0 var(--yellow);
+}
+nav button:hover::before {
+  content: "► ";
+  color: var(--yellow);
 }
 
 .avatar-box {
@@ -258,60 +270,19 @@ ul.l li::marker { color: var(--pink); }
 }
 .photo-caption { font-size: 16px; color: var(--yellow); margin-top: 4px; }
 
-/* Layout Assimétrico para o Mural Pessoal */
-.mural-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 10px;
-}
-.photo-card-featured {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid var(--yellow);
-  background: #0a0612;
-  padding: 6px;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-.photo-card-featured:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 12px var(--yellow);
-}
-.photo-card-featured img {
-  width: 100%;
-  height: 290px;
-  object-fit: cover;
-  display: block;
-  border: 1px solid var(--pink);
-  margin-bottom: 6px;
-}
-.mural-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.photo-card-small {
+/* Container do Player Iframe Estilizado */
+.synthwave-player-container {
   border: 2px solid var(--cyan);
-  background: #0a0612;
-  padding: 4px;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.2s;
+  background: var(--bg);
+  padding: 2px;
+  box-shadow: inset 0 0 10px rgba(5, 242, 255, 0.3), 0 0 8px rgba(255, 42, 109, 0.4);
+  position: relative;
+  overflow: hidden;
 }
-.photo-card-small:hover {
-  transform: scale(1.02);
-  border-color: var(--yellow);
-  box-shadow: 0 0 10px var(--pink);
-}
-.photo-card-small img {
-  width: 100%;
-  height: 75px;
-  object-fit: cover;
+
+.synthwave-player-container iframe {
   display: block;
-  border: 1px solid var(--pink);
-  margin-bottom: 4px;
+  filter: contrast(1.15) saturate(1.2);
 }
 
 .btn { margin-top: 8px; font: inherit; padding: 3px 14px; background: var(--yellow); color: #000; border: 0; box-shadow: 3px 3px 0 var(--pink); cursor: pointer; }
@@ -414,7 +385,6 @@ body.vhs .modal-img-container::after {
   }
   nav ul { display: grid; grid-template-columns: 1fr 1fr; gap: 0 6px; }
   .grid, .field-photos-grid, .mural-layout { grid-template-columns: 1fr; }
-  .photo-card-featured img { height: 200px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .sun, .floor, .ticker span, body.vhs::after, header h1 { animation: none; }
