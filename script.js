@@ -212,7 +212,7 @@ const petFaces = {
   happy: ['(>^ω^<)', '(•ω•)', '(=^‥^=)'],
   love: ['(｡♥‿♥｡)', '(✿ ♥‿♥)', '(˘⌣˘ʃƪ)'],
   hungry: ['(°ロ°)', '(¬_¬)', '(-_-)'],
-  party: ['(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧', ' \\(^ヮ^)/ ']
+  party: ['(ﾉ◕ヮ◕)ﾉ*:✧', ' \\(^ヮ^)/ ']
 };
 
 function updatePetDisplay() {
@@ -259,7 +259,7 @@ const tips = [
   '🤖 "Sabia que você pode clicar em qualquer foto de campo para ampliá-la com zoom?"',
   '🤖 "Teste o efeito VHS no menu lateral para alternar o visual retrô!"',
   '🤖 "Interaja com o Tamagotchi para mantê-lo feliz e saudável!"',
-  '🤖 "Não deixe de assinar o livro de visitas com persistência local!"',
+  '🤖 "Não deixe de assinar o livro de visitas!"',
   '🤖 "Dê um play na trilha sonora de Karl Casey para curtir o som!"'
 ];
 
