@@ -15,43 +15,26 @@ navButtons.forEach(btn => {
   });
 });
 
-// --- Contador de Visitantes Real e Global (API Estável) ---
+// --- Contador de Visitantes Real (CountAPI) ---
 function initVisitorCounter() {
   const countEl = document.getElementById('count');
   if (!countEl) return;
 
-  // Mostra o texto "LOAD..." enquanto busca o valor real no servidor
+  // Exibe o texto de carregamento retrô
   countEl.textContent = 'LOAD...';
 
-  // Usando um endpoint público e estável para contagem de visitas
-  fetch('https://api.apifree.co/v1/counter/mayumi-space-portfolio/hit')
+  fetch('https://api.countapi.xyz/hit/mayumiware-portfolio/visits')
     .then(res => res.json())
     .then(data => {
-      // Verifica se a API retornou o valor com sucesso
-      const visits = data.value || data.count || (data.data && data.data.value);
-      if (typeof visits !== 'undefined') {
-        countEl.textContent = String(visits).padStart(6, '0');
+      if (data && typeof data.value !== 'undefined') {
+        countEl.textContent = String(data.value).padStart(6, '0');
       } else {
-        throw new Error('Formato de resposta incompatível');
+        throw new Error();
       }
     })
     .catch(() => {
-      // Fallback inteligente: se a API falhar, usa o localStorage para garantir que o site nunca fique quebrado
-      const COUNTER_KEY = 'mayumi_space_visitor_count';
-      let currentCount = parseInt(localStorage.getItem(COUNTER_KEY), 10);
-      if (isNaN(currentCount)) {
-        currentCount = 1339; // Valor inicial retrô
-        localStorage.setItem(COUNTER_KEY, currentCount);
-      } else {
-        // Incrementa localmente caso seja uma nova sessão offline
-        const VISITED_SESSION = 'mayumi_space_session';
-        if (!sessionStorage.getItem(VISITED_SESSION)) {
-          currentCount += 1;
-          localStorage.setItem(COUNTER_KEY, currentCount);
-          sessionStorage.setItem(VISITED_SESSION, 'true');
-        }
-      }
-      countEl.textContent = String(currentCount).padStart(6, '0');
+      // Fallback clássico caso a API caia momentaneamente
+      countEl.textContent = '001337';
     });
 }
 
