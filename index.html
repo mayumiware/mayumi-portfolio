@@ -24,12 +24,19 @@
 
   <!-- Ticker Noticioso Retrô -->
   <div class="ticker">
-    <span>*** Estudando Ciência da Computação e Segurança Cibernética  *** Manutenção de dispositivos eletrônicos *** Programação Web retrô ***</span>
+    <span>*** Estudando Ciência da Computação e Segurança Cibernética *** Manutenção de dispositivos eletrônicos *** Programação Web retrô ***</span>
     <em id="clock">--:--:--</em>
   </div>
 
-  <!-- Menu de Navegação e Perfil -->
+  <!-- Menu de Navegação, Perfil e Widget de Notícias (Esquerda) -->
   <nav class="box" aria-label="Menu principal">
+    <h2>Perfil</h2>
+    <div class="in" style="text-align: center;">
+      <div class="avatar-box" onclick="openModal('assets/profile/Umi.png', '[ Cíntia Mayumi - Foto de Perfil ]')" onmouseenter="playHoverSound()">
+        <img src="assets/profile/Umi.png" alt="Cíntia Mayumi" onerror="this.src='https://placehold.co/130x130/170a2b/ffc400?text=Mayumi';">
+      </div>
+    </div>
+
     <h2>Navegação</h2>
     <ul>
       <li><button data-go="sobre" aria-current="true" onclick="playClickSound()" onmouseenter="playHoverSound()">Sobre mim</button></li>
@@ -37,24 +44,33 @@
       <li><button data-go="experiencias" onclick="playClickSound()" onmouseenter="playHoverSound()">Experiências</button></li>
       <li><button data-go="fotos" onclick="playClickSound()" onmouseenter="playHoverSound()">Fotos de Campo</button></li>
       <li><button data-go="projetos" onclick="playClickSound()" onmouseenter="playHoverSound()">Projetos</button></li>
-      <li><button data-go="mural" onclick="playClickSound()" onmouseenter="playHoverSound()">Mural</button></li>
     </ul>
 
-    <h2>Perfil</h2>
-    <div class="in">
-      <div class="avatar-box" onclick="openModal('assets/profile/Umi.png', '[ Cíntia Mayumi - Foto de Perfil ]')" onmouseenter="playHoverSound()">
-        <img src="assets/profile/Umi.png" alt="Cíntia Mayumi" onerror="this.src='https://placehold.co/130x130/170a2b/ffc400?text=Mayumi';">
+    <!-- Widget de Notícias (Com Iframe Maior e Altura Aumentada) -->
+    <div class="box widget-box" style="margin-top: 6px; border: 1px solid var(--cyan);">
+      <h3>Cybersec Feed</h3>
+      <div class="in">
+        <p style="font-size: 14px; color: var(--yellow); margin-bottom: 4px;">Feed de <a href="https://www.cybersecbrazil.com.br/" target="_blank" rel="noopener">Cybersec Brazil</a>:</p>
+        <div class="synthwave-player-container" style="height: 220px; overflow: hidden; position: relative; background: #000;">
+          <iframe src="https://www.cybersecbrazil.com.br/" style="width: 220%; height: 220%; transform: scale(0.45); transform-origin: 0 0; border:0; background: #000;" title="Cybersec Brazil"></iframe>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 6px; font-size: 13px;">
+          <a href="#" onclick="openNewsModal(); return false;">[ 🔍 Tela Cheia ]</a>
+          <a href="https://www.cybersecbrazil.com.br/" target="_blank" rel="noopener">» Site Oficial</a>
+        </div>
       </div>
     </div>
 
-    <h2>My Icon</h2>
-    <div class="in">
-      <div class="avatar-box" style="width: 90px; height: 90px;" onclick="openModal('assets/profile/iconsite.png', '[ Tech Cat - Ícone do Site ]')" onmouseenter="playHoverSound()">
-        <img src="assets/profile/iconsite.png" alt="Ícone Gato Tech" onerror="this.src='https://placehold.co/90x90/170a2b/05f2ff?text=TechCat';">
+    <!-- Faculdades -->
+    <div class="box" style="margin-top: 6px; border: 1px solid var(--cyan);">
+      <h3>Faculdades</h3>
+      <div class="in" style="font-size: 16px;">
+        <div>• Ciência da Computação<br><small style="color: var(--cyan)">Univ. Farias Brito</small> <span class="tag">cursando</span></div>
+        <div style="margin-top:4px">• Cibersegurança<br><small style="color: var(--cyan)">Univ. de Fortaleza</small> <span class="tag">cursando</span></div>
       </div>
     </div>
 
-    <div class="in">
+    <div class="in" style="margin-top: 6px;">
       <button class="btn" id="vhs" type="button" style="width: 100%;" onmouseenter="playHoverSound()">Efeito VHS: ligado</button>
     </div>
   </nav>
@@ -63,12 +79,59 @@
   <main class="box">
     <!-- Sobre Mim -->
     <section id="sobre" class="on">
-      <h2>Seção » Perfil &amp; Foco</h2>
+      <h2>Seção » Perfil, Habilidades &amp; Mural</h2>
       <div class="in">
         <h2 class="big">Sobre mim</h2>
         <img src="assets/profile/abra-a-mente-removebg-preview.png" class="center-img"><br>
         <p>Olá! Sou Cíntia Mayumi, uma pessoa curiosa que adora desmontar coisas e explorar as possibilidades da tecnologia.</p><br>
         <p><b>Foco Operacional:</b> Cibersegurança, forense digital e manutenção de hardware.</p>
+
+        <hr style="border: 1px dashed var(--cyan); margin: 20px 0;">
+
+        <h3 style="color: var(--yellow);">// Habilidades (Hard &amp; Soft Skills)</h3>
+        <div class="grid" style="margin-bottom: 20px;">
+          <div class="card">
+            <h3>Hard Skills</h3>
+            <ul class="l">
+              <li>Reparo de hardware e microeletrônica</li>
+              <li>Soldagem e eletrônica avançada</li>
+              <li>ExifTool básico</li>
+              <li>Python e SQL básico</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Soft Skills</h3>
+            <ul class="l">
+              <li>Curiosidade e aprendizado contínuo</li>
+              <li>Precisão e persistência técnica</li>
+              <li>Adaptável e aprendizado rápido</li>
+              <li>Trabalho em equipe e comunicação</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr style="border: 1px dashed var(--cyan); margin: 20px 0;">
+
+        <h3 style="color: var(--yellow);">// Mural Pessoal: O que me faz ter ânsia por viver?</h3>
+        <p>Um espaço dedicado às coisas que mais amo fazer (clique nas imagens para ampliar):</p>
+        <div class="field-photos-grid">
+          <div class="photo-card" onclick="openModal('assets/evidence/minha-visao.png', '[01] Hobbies &amp; Paixões')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/minha-visao.png" alt="Hobbie 1" onerror="this.src='https://placehold.co/300x200/170a2b/ffc400?text=Hobbie+1';">
+            <div class="photo-caption">[01] Paixão &amp; Hobbies</div>
+          </div>
+          <div class="photo-card" onclick="openModal('assets/evidence/reparo-placa.png', '[02] Caçando curtos')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/reparo-placa.png" alt="Hobbie 2" onerror="this.src='https://placehold.co/300x200/170a2b/05f2ff?text=Hobbie+2';">
+            <div class="photo-caption">[02] Caçando curtos</div>
+          </div>
+          <div class="photo-card" onclick="openModal('assets/evidence/reparor-fonte.png', '[03] Consertar e aprender')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/reparor-fonte.png" alt="Hobbie 3" onerror="this.src='https://placehold.co/300x200/170a2b/05f2ff?text=Hobbie+3';">
+            <div class="photo-caption">[03] Consertar e aprender</div>
+          </div>
+          <div class="photo-card" onclick="openModal('assets/evidence/reparo-socket-cpu.png', '[04] Precisão e persistência')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/reparo-socket-cpu.png" alt="Hobbie 4" onerror="this.src='https://placehold.co/300x200/170a2b/05f2ff?text=Hobbie+4';">
+            <div class="photo-caption">[04] Precisão e persistência</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -164,56 +227,11 @@
         </div>
       </div>
     </section>
-
-    <!-- Seção Mural -->
-    <section id="mural">
-      <h2>Seção » Mural Pessoal</h2>
-      <div class="in">
-        <h2 class="big">O que me faz ter ânsia por viver?</h2>
-        <p>Um espaço dedicado às coisas que mais amo fazer (clique nas imagens para ampliar):</p>
-        <div class="field-photos-grid">
-          <div class="photo-card" onclick="openModal('assets/evidence/minha-visao.png', '[01] Hobbies &amp; Paixões')" onmouseenter="playHoverSound()">
-            <img src="assets/evidence/minha-visao.png" alt="Hobbie 1" onerror="this.src='https://placehold.co/300x200/170a2b/ffc400?text=Hobbie+1';">
-            <div class="photo-caption">[01] Paixão &amp; Hobbies</div>
-          </div>
-          <div class="photo-card" onclick="openModal('assets/evidence/reparo-placa.png', '[02] Caçando curtos')" onmouseenter="playHoverSound()">
-            <img src="assets/evidence/reparo-placa.png" alt="Hobbie 2" onerror="this.src='https://placehold.co/300x200/170a2b/05f2ff?text=Hobbie+2';">
-            <div class="photo-caption">[02] Caçando curtos</div>
-          </div>
-          <div class="photo-card" onclick="openModal('assets/evidence/reparor-fonte.png', '[03] Consertar e aprender')" onmouseenter="playHoverSound()">
-            <img src="assets/evidence/reparor-fonte.png" alt="Hobbie 2" onerror="this.src='https://placehold.co/300x200/170a2b/05f2ff?text=Hobbie+3';">
-            <div class="photo-caption">[03] Consertar e aprender</div>
-          </div>
-          <div class="photo-card" onclick="openModal('assets/evidence/reparo-socket-cpu.png', '[04] Precisão e persistência')" onmouseenter="playHoverSound()">
-            <img src="assets/evidence/reparo-socket-cpu.png" alt="Hobbie 2" onerror="this.src='https://placehold.co/300x200/170a2b/05f2ff?text=Hobbie+2';">
-            <div class="photo-caption">[04] Precisão e persistência</div>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <!-- Barra Lateral Direita -->
   <aside>
-    <div class="box" style="margin-bottom:6px">
-      <h3>Faculdades</h3>
-      <div class="in">
-        <div>• Ciência da Computação<br><small style="color: var(--cyan)">Univ. Farias Brito</small> <span class="tag">cursando</span></div>
-        <div style="margin-top:6px">• Cibersegurança<br><small style="color: var(--cyan)">Univ. de Fortaleza</small> <span class="tag">cursando</span></div>
-      </div>
-    </div>
-
-    <div class="box" style="margin-bottom:6px">
-      <h3>Habilidades</h3>
-      <div class="in">
-        <ul class="l">
-          <li>Reparo de hardware</li>
-          <li>Soldagem e eletrônica</li>
-          <li>ExifTool básico</li>
-        </ul>
-      </div>
-    </div>
-
+    <!-- Redes Sociais -->
     <div class="box" style="margin-bottom:6px">
       <h3>Redes Sociais</h3>
       <div class="in">
@@ -222,27 +240,58 @@
       </div>
     </div>
 
-<!-- Player de Áudio Retrô via Iframe (Karl Casey - Hackers) -->
-<div class="box" style="margin-bottom:6px">
-  <h3>Trilha Sonora // OST</h3>
-  <div class="in">
-    <p style="font-size: 14px; margin-bottom: 6px; color: var(--yellow);">» Hackers - Karl Casey (White Bat Audio)</p>
-    <div class="synthwave-player-container">
-      <iframe 
-        width="100%" 
-        height="120" 
-        src="https://www.youtube-nocookie.com/embed/NZ4Of3lID84?autoplay=1" 
-        title="Karl Casey - Hackers" 
-        style="border:0;" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-      </iframe>
-    </div>
-  </div>
+    <!-- 1. Player MP3 Clássico -->
+    <div class="box widget-box" style="margin-bottom:6px">
+      <h3>Winamp // OST Player</h3>
+      <div class="in">
+        <p style="font-size: 14px; margin-bottom: 4px; color: var(--yellow);">» Trilha Sonora: "Hackers" por Karl Casey @ White Bat Audio</p>
+        <div class="synthwave-player-container">
+          <iframe id="youtubePlayer" width="100%" height="90" src="https://www.youtube-nocookie.com/embed/NZ4Of3lID84?enablejsapi=1" title="Karl Casey - Hackers" style="border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+ <!-- Botões de Controle Neon Estilizados -->
+<div class="player-controls">
+  <button class="winamp-btn play-btn" onclick="playerAction('play')" onmouseenter="playHoverSound()">
+    ►
+  </button>
+  <button class="winamp-btn pause-btn" onclick="playerAction('pause')" onmouseenter="playHoverSound()">
+    ❚❚
+  </button>
+  <button class="winamp-btn replay-btn" onclick="playerAction('restart')" onmouseenter="playHoverSound()">
+    ◄◄
+  </button>
 </div>
+    </div>
+
+    <!-- 2. Tamagotchi Retrô -->
+    <div class="box widget-box" style="margin-bottom:6px">
+      <h3>Tamagotchi</h3>
+      <div class="in" style="text-align: center;">
+        <div id="petScreen" style="background: #000; border: 2px solid var(--cyan); padding: 8px; font-size: 22px; color: var(--green, #05f2ff); margin-bottom: 6px; letter-spacing: 2px;">
+          <span id="petFace">(>^ω^<)</span> <br>
+          <span id="petStatus" style="font-size: 14px; color: var(--yellow);">Fome: 50% | Humor: 😀</span>
+        </div>
+        <div style="display: flex; gap: 4px; justify-content: center;">
+          <button class="btn" style="padding: 2px 6px; font-size: 16px; margin: 0;" onclick="feedPet()" onmouseenter="playHoverSound()">Alimentar</button>
+          <button class="btn" style="padding: 2px 6px; font-size: 16px; margin: 0;" onclick="playPet()" onmouseenter="playHoverSound()">Brincar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Assinatura de Visitas (Guestbook) -->
+    <div class="box widget-box" style="margin-bottom:6px">
+      <h3>Mural de Recados</h3>
+      <div class="in">
+        <div id="guestbookMessages" style="background: #000; border: 1px solid var(--cyan); height: 200px; overflow-y: auto; font-size: 13px; padding: 4px; margin-bottom: 4px;">
+          <div style="color: var(--yellow);">[Sistema]: Deixe seu recado!</div>
+        </div>
+        <input type="text" id="guestName" placeholder="Seu nome" style="width: 100%; background: #0a0612; color: #fff; border: 1px solid var(--pink); font-family: inherit; font-size: 14px; padding: 2px; margin-bottom: 3px;">
+        <textarea id="guestMsg" placeholder="Sua assinatura..." style="width: 100%; height: 35px; background: #0a0612; color: #fff; border: 1px solid var(--pink); font-family: inherit; font-size: 14px; padding: 2px; resize: none; margin-bottom: 3px;"></textarea>
+        <button class="btn" style="width: 100%; font-size: 15px; padding: 2px; margin: 0;" onclick="signGuestbook()" onmouseenter="playHoverSound()">Assinar Livro</button>
+      </div>
+    </div>
 
     <div class="box">
-      <h3>Visitantes</h3>
+      <h3>Contador de Visitas</h3>
       <div class="in">
         <div class="counter" id="count">LOAD...</div>
       </div>
@@ -251,11 +300,23 @@
 
   <!-- Rodapé -->
   <footer class="box">
-    Atualizado em 2026-11-08 · Cíntia Mayumi Portfólio
+    Atualizado em 2026-11-09 · Mayumi Website retro<br>
   </footer>
 </div>
 
-<!-- Modal Retrô com Zoom -->
+<!-- Assistente Virtual Flutuante -->
+<div id="floatingAssistant" class="floating-assistant">
+  <div class="assistant-header">
+    <span>Assistente Virtual</span>
+    <button class="assistant-toggle-btn" onclick="toggleAssistant()" title="Ocultar Assistente" onmouseenter="playHoverSound()">[ _ ]</button>
+  </div>
+  <div class="assistant-body">
+    <div id="virtualAssistantText">🤖 "Olá! Clique nos botões para explorar o portfólio da Mayumi!"</div>
+    <button class="btn" style="width: 100%; font-size: 14px; padding: 2px; margin-top: 6px;" onclick="assistantTip()" onmouseenter="playHoverSound()">Nova Dica</button>
+  </div>
+</div>
+
+<!-- Modal 1: Image Viewer -->
 <div id="retroModal" class="retro-modal" onclick="closeModalOnOuterClick(event)">
   <div class="modal-box">
     <div class="modal-header">
@@ -269,6 +330,23 @@
       <img id="modalImage" src="" alt="Ampliada">
     </div>
     <div id="modalCaption" class="modal-caption"></div>
+  </div>
+</div>
+
+<!-- Modal 2: News Reader (Cybersec Brazil) -->
+<div id="newsModal" class="retro-modal" onclick="closeNewsModalOnOuterClick(event)">
+  <div class="modal-box" style="max-width: 800px;">
+    <div class="modal-header">
+      <span>// NEWS_READER.EXE - Cybersec Brazil Feed</span>
+      <span class="modal-close" onclick="closeNewsModal()" onmouseenter="playHoverSound()">[ X ]</span>
+    </div>
+    <div style="padding: 8px; background: #000; border: 2px solid var(--cyan); margin: 8px 0;">
+      <iframe src="https://www.cybersecbrazil.com.br/" style="width: 100%; height: 450px; border: 0;" title="Cybersec Brazil Full Feed"></iframe>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 4px;">
+      <span style="font-size: 14px; color: var(--yellow);">Fonte: cybersecbrazil.com.br</span>
+      <a href="https://www.cybersecbrazil.com.br/" target="_blank" rel="noopener" class="btn" style="text-decoration: none; display: inline-block;">» Ir ao site oficial</a>
+    </div>
   </div>
 </div>
 
