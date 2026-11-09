@@ -1,17 +1,3 @@
-// --- Relógio do Ticker Retrô ---
-function updateClock() {
-  const now = new Date();
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const seconds = String(now.getSeconds()).padStart(2, '0');
-  const clockEl = document.getElementById('clock');
-  if (clockEl) {
-    clockEl.textContent = `${hours}:${minutes}:${seconds}`;
-  }
-}
-setInterval(updateClock, 1000);
-updateClock();
-
 // --- Navegação entre Seções ---
 const navButtons = document.querySelectorAll('nav button[data-go]');
 const sections = document.querySelectorAll('main section');
@@ -29,21 +15,33 @@ navButtons.forEach(btn => {
   });
 });
 
-// --- Contador de Visitantes Real (CountAPI) ---
-fetch('https://api.countapi.xyz/hit/mayumiware-portfolio/visits')
-  .then(res => res.json())
-  .then(data => {
-    const countEl = document.getElementById('count');
-    if (countEl && data && typeof data.value !== 'undefined') {
-      countEl.textContent = String(data.value).padStart(6, '0');
-    } else {
-      throw new Error();
+// --- Contador de Visitantes com Persistência Local ---
+function initVisitorCounter() {
+  const countEl = document.getElementById('count');
+  if (!countEl) return;
+
+  // Exibe o texto "LOAD..." enquanto processa a leitura
+  countEl.textContent = 'LOAD...';
+
+  setTimeout(() => {
+    const COUNTER_KEY = 'mayumi_space_visitor_count';
+    const VISITED_SESSION_KEY = 'mayumi_space_visited_session';
+
+    let currentCount = parseInt(localStorage.getItem(COUNTER_KEY), 10);
+    
+    if (isNaN(currentCount)) {
+      currentCount = 1337; // Valor inicial estático retrô
     }
-  })
-  .catch(() => {
-    const countEl = document.getElementById('count');
-    if (countEl) countEl.textContent = '001337';
-  });
+
+    if (!sessionStorage.getItem(VISITED_SESSION_KEY)) {
+      currentCount += 1;
+      localStorage.setItem(COUNTER_KEY, currentCount);
+      sessionStorage.setItem(VISITED_SESSION_KEY, 'true');
+    }
+
+    countEl.textContent = String(currentCount).padStart(6, '0');
+  }, 400);
+}
 
 // --- Modal 1: Imagem com Zoom ---
 const modal = document.getElementById('retroModal');
@@ -203,7 +201,7 @@ const petFaces = {
   happy: ['(>^ω^<)', '(•ω•)', '(=^‥^=)'],
   love: ['(｡♥‿♥｡)', '(✿ ♥‿♥)', '(˘⌣˘ʃƪ)'],
   hungry: ['(°ロ°)', '(¬_¬)', '(-_-)'],
-  party: ['(ﾉ◕ヮ◕)ﾉ*✧', ' \\(^ヮ^)/ ']
+  party: ['(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧', ' \\(^ヮ^)/ ']
 };
 
 function updatePetDisplay() {
@@ -330,6 +328,8 @@ function escapeHtml(text) {
   return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
 
+// --- Inicialização ao Carregar a Página ---
 document.addEventListener('DOMContentLoaded', () => {
   loadGuestbook();
+  initVisitorCounter();
 });
