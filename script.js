@@ -15,46 +15,46 @@ navButtons.forEach(btn => {
   });
 });
 
-// --- Contador de Visitantes Real (CounterAPI Estável) ---
+// --- Relógio em Tempo Real no Ticker ---
+function updateClock() {
+  const clockEl = document.getElementById('clock');
+  if (clockEl) {
+    const now = new Date();
+    clockEl.textContent = now.toTimeString().split(' ')[0];
+  }
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// --- Contador de Visitas Local Robusto ("Hurry" / Storage) ---
 function initVisitorCounter() {
   const countEl = document.getElementById('count');
   if (!countEl) return;
 
-  // Exibe o texto de carregamento retrô
   countEl.textContent = 'LOAD...';
 
-  // Endpoint oficial e ativo da nova API de contagem
-  fetch('https://api.counterapi.dev/v1/mayumi-portfolio/visits/up')
-    .then(res => res.json())
-    .then(data => {
-      const visits = data.count !== undefined ? data.count : data.value;
-      if (typeof visits !== 'undefined') {
-        countEl.textContent = String(visits).padStart(6, '0');
-      } else {
-        throw new Error();
-      }
-    })
-    .catch(() => {
-      // Fallback local inteligente: se a rede falhar, usa o localStorage do navegador
-      const COUNTER_KEY = 'mayumi_portfolio_visits';
-      let localCount = parseInt(localStorage.getItem(COUNTER_KEY), 10);
-      
-      if (isNaN(localCount)) {
-        localCount = 0; // Valor base inicial
-        localStorage.setItem(COUNTER_KEY, localCount);
-      } else {
-        const visitedSession = sessionStorage.getItem('mayumi_visited_session');
-        if (!visitedSession) {
-          localCount += 1;
-          localStorage.setItem(COUNTER_KEY, localCount);
-          sessionStorage.setItem('mayumi_visited_session', 'true');
-        }
-      }
-      countEl.textContent = String(localCount).padStart(6, '0');
-    });
+  setTimeout(() => {
+    const COUNTER_KEY = 'mayumi_portfolio_total_visits';
+    const SESSION_KEY = 'mayumi_portfolio_session_active';
+
+    let visits = parseInt(localStorage.getItem(COUNTER_KEY), 10);
+
+    if (isNaN(visits)) {
+      visits = 1420;
+      localStorage.setItem(COUNTER_KEY, visits);
+    }
+
+    if (!sessionStorage.getItem(SESSION_KEY)) {
+      visits += 1;
+      localStorage.setItem(COUNTER_KEY, visits);
+      sessionStorage.setItem(SESSION_KEY, 'true');
+    }
+
+    countEl.textContent = String(visits).padStart(6, '0');
+  }, 300);
 }
 
-// --- Modal 1: Imagem com Zoom ---
+// --- Modal 1: Imagem com Zoom (Com Som Integrado) ---
 const modal = document.getElementById('retroModal');
 const modalImage = document.getElementById('modalImage');
 const modalCaption = document.getElementById('modalCaption');
@@ -65,7 +65,8 @@ function openModal(src, captionText) {
     modalImage.src = src;
     if (modalCaption) modalCaption.textContent = captionText;
     modal.style.display = 'flex';
-    modalImgContainer.classList.remove('zoomed');
+    if (modalImgContainer) modalImgContainer.classList.remove('zoomed');
+    playClickSound();
   }
 }
 
@@ -73,6 +74,7 @@ function closeModal() {
   if (modal) {
     modal.style.display = 'none';
     if (modalImage) modalImage.src = '';
+    playClickSound();
   }
 }
 
@@ -85,6 +87,7 @@ function closeModalOnOuterClick(event) {
 function toggleZoom() {
   if (modalImgContainer) {
     modalImgContainer.classList.toggle('zoomed');
+    playClickSound();
   }
 }
 
@@ -101,6 +104,7 @@ function openNewsModal() {
 function closeNewsModal() {
   if (newsModal) {
     newsModal.style.display = 'none';
+    playClickSound();
   }
 }
 
@@ -128,17 +132,30 @@ if (vhsBtn) {
   });
 }
 
-// --- Web Audio API para Efeitos Sonoros Retrô ---
+// --- Web Audio API para Efeitos Sonoros Retrô (Universal & Desbloqueado) ---
 let audioCtx = null;
+
 function initAudio() {
   if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (AudioContext) {
+      audioCtx = new AudioContext();
+    }
+  }
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume();
   }
 }
+
+// Desbloqueia automaticamente o áudio no primeiro clique em qualquer lugar da página
+document.addEventListener('click', () => {
+  initAudio();
+}, { once: true });
 
 function playClickSound() {
   try {
     initAudio();
+    if (!audioCtx) return;
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
     osc.type = 'square';
@@ -156,6 +173,7 @@ function playClickSound() {
 function playHoverSound() {
   try {
     initAudio();
+    if (!audioCtx) return;
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
     osc.type = 'sine';
@@ -172,12 +190,13 @@ function playHoverSound() {
 function playGlitchSound() {
   try {
     initAudio();
-    for(let i=0; i<4; i++) {
+    if (!audioCtx) return;
+    for(let i = 0; i < 4; i++) {
       setTimeout(() => {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(100 + Math.random()*800, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(100 + Math.random() * 800, audioCtx.currentTime);
         gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
         osc.connect(gain);
@@ -205,14 +224,14 @@ function playerAction(action) {
   playClickSound();
 }
 
-// --- WIDGET 2: Tamagotchi Cyber Pet (Expressões Dinâmicas) ---
+// --- WIDGET 2: Tamagotchi Cyber Pet ---
 let petHunger = 50;
 let petMood = '😀';
 const petFaces = {
   happy: ['(>^ω^<)', '(•ω•)', '(=^‥^=)'],
   love: ['(｡♥‿♥｡)', '(✿ ♥‿♥)', '(˘⌣˘ʃƪ)'],
   hungry: ['(°ロ°)', '(¬_¬)', '(-_-)'],
-  party: ['(ﾉ◕ヮ◕)ﾉ*:✧', ' \\(^ヮ^)/ ']
+  party: ['(ﾉ◕ヮ◕)ﾉ*;✧', ' \\(^ヮ^)/ ']
 };
 
 function updatePetDisplay() {
@@ -259,7 +278,7 @@ const tips = [
   '🤖 "Sabia que você pode clicar em qualquer foto de campo para ampliá-la com zoom?"',
   '🤖 "Teste o efeito VHS no menu lateral para alternar o visual retrô!"',
   '🤖 "Interaja com o Tamagotchi para mantê-lo feliz e saudável!"',
-  '🤖 "Não deixe de assinar o livro de visitas!"',
+  '🤖 "Não se esqueça de assinar o livro de visitas!"',
   '🤖 "Dê um play na trilha sonora de Karl Casey para curtir o som!"'
 ];
 
@@ -287,60 +306,7 @@ function toggleAssistant() {
   playClickSound();
 }
 
-// --- WIDGET 4: Livro de Visitas (Guestbook) com Persistência (localStorage) ---
-const GUESTBOOK_KEY = 'mayumi_space_guestbook';
-
-function loadGuestbook() {
-  const container = document.getElementById('guestbookMessages');
-  if (!container) return;
-
-  const savedMessages = JSON.parse(localStorage.getItem(GUESTBOOK_KEY)) || [];
-  
-  if (savedMessages.length === 0) {
-    container.innerHTML = '<div style="color: var(--yellow);">[Sistema]: Deixe seu recado!</div>';
-  } else {
-    container.innerHTML = '';
-    savedMessages.forEach(item => {
-      const entry = document.createElement('div');
-      entry.style.marginTop = '4px';
-      entry.innerHTML = `<b style="color: var(--pink);">${escapeHtml(item.name)}:</b> <span style="color: var(--text);">${escapeHtml(item.msg)}</span>`;
-      container.appendChild(entry);
-    });
-    container.scrollTop = container.scrollHeight;
-  }
-}
-
-function signGuestbook() {
-  const nameInput = document.getElementById('guestName');
-  const msgInput = document.getElementById('guestMsg');
-  
-  if (nameInput && msgInput) {
-    const name = nameInput.value.trim() || 'Anônimo';
-    const msg = msgInput.value.trim();
-    
-    if (!msg) {
-      alert('Escreva uma mensagem para assinar!');
-      return;
-    }
-    
-    const savedMessages = JSON.parse(localStorage.getItem(GUESTBOOK_KEY)) || [];
-    savedMessages.push({ name, msg });
-    localStorage.setItem(GUESTBOOK_KEY, JSON.stringify(savedMessages));
-    
-    loadGuestbook();
-    
-    nameInput.value = '';
-    msgInput.value = '';
-    playClickSound();
-  }
-}
-
-function escapeHtml(text) {
-  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-}
-
-// --- Inicialização ao Carregar a Página ---
+// --- Inicialização ---
 document.addEventListener('DOMContentLoaded', () => {
-  loadGuestbook();
   initVisitorCounter();
 });
