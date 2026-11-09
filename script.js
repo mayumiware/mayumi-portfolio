@@ -30,7 +30,6 @@
     const namespace = "mayumiware-portfolio";
     const key = "total-visits";
 
-    // Função de formatação
     function setDigits(num) {
       countEl.textContent = String(num).padStart(6, '0');
     }
@@ -49,7 +48,7 @@
         }
       })
       .catch(() => {
-        // Tentativa 2: API Secundária (CounterAPI)
+        // Tentativa 2: CounterAPI Secundária
         fetch(`https://counterapi.com/api/${namespace}/view`)
           .then(res => res.json())
           .then(data => {
@@ -60,7 +59,7 @@
             }
           })
           .catch(() => {
-            // Tentativa 3: Fallback de persistência local + valor base fictício/acumulado
+            // Tentativa 3: Fallback local
             let visits = parseInt(localStorage.getItem('site_visits') || '12', 10) + 1;
             localStorage.setItem('site_visits', visits);
             setDigits(visits);
