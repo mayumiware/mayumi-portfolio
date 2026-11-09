@@ -24,7 +24,7 @@
 
   <!-- Ticker Noticioso Retrô -->
   <div class="ticker">
-    <span>*** Estudando Ciência da Computação e Segurança Cibernética *** Manutenção de dispositivos eletrônicos *** Programação Web retrô ***</span>
+    <span>*** Estudos em Ciência da Computação e Segurança Cibernética *** Manutenção de dispositivos eletrônicos *** Programação Web retrô ***</span>
     <em id="clock">--:--:--</em>
   </div>
 
@@ -46,7 +46,7 @@
       <li><button data-go="projetos" onclick="playClickSound()" onmouseenter="playHoverSound()">Projetos</button></li>
     </ul>
 
-    <!-- Widget de Notícias (Com Iframe Maior e Altura Aumentada) -->
+    <!-- Widget de Notícias -->
     <div class="box widget-box" style="margin-top: 6px; border: 1px solid var(--cyan);">
       <h3>Cybersec Feed</h3>
       <div class="in">
@@ -55,8 +55,8 @@
           <iframe src="https://www.cybersecbrazil.com.br/" style="width: 220%; height: 220%; transform: scale(0.45); transform-origin: 0 0; border:0; background: #000;" title="Cybersec Brazil"></iframe>
         </div>
         <div style="display: flex; justify-content: space-between; margin-top: 6px; font-size: 13px;">
-          <a href="#" onclick="openNewsModal(); return false;">[ 🔍 Tela Cheia ]</a>
-          <a href="https://www.cybersecbrazil.com.br/" target="_blank" rel="noopener">» Site Oficial</a>
+          <a href="#" onclick="openNewsModal(); return false;" onmouseenter="playHoverSound()">[ 🔍 Tela Cheia ]</a>
+          <a href="https://www.cybersecbrazil.com.br/" target="_blank" rel="noopener" onmouseenter="playHoverSound()">» Site Oficial</a>
         </div>
       </div>
     </div>
@@ -88,7 +88,7 @@
 
         <hr style="border: 1px dashed var(--cyan); margin: 20px 0;">
 
-        <h3 style="color: var(--yellow);">// Habilidades (Hard &amp; Soft Skills)</h3>
+        <h3 style="color: var(--yellow);">// Habilidades</h3>
         <div class="grid" style="margin-bottom: 20px;">
           <div class="card">
             <h3>Hard Skills</h3>
@@ -113,7 +113,7 @@
         <hr style="border: 1px dashed var(--cyan); margin: 20px 0;">
 
         <h3 style="color: var(--yellow);">// Mural Pessoal: O que me faz ter ânsia por viver?</h3>
-        <p>Um espaço dedicado às coisas que mais amo fazer (clique nas imagens para ampliar):</p>
+        <p>Um espaço dedicado às coisas que mais amo fazer:</p>
         <div class="field-photos-grid">
           <div class="photo-card" onclick="openModal('assets/evidence/minha-visao.png', '[01] Hobbies &amp; Paixões')" onmouseenter="playHoverSound()">
             <img src="assets/evidence/minha-visao.png" alt="Hobbie 1" onerror="this.src='https://placehold.co/300x200/170a2b/ffc400?text=Hobbie+1';">
@@ -157,7 +157,7 @@
 
     <!-- Experiências -->
     <section id="experiencias">
-      <h2>Seção » Experiência Prática</h2>
+      <h2>Seção » Experiência Técnica</h2>
       <div class="in">
         <h2 class="big">Trabalho de Campo &amp; Manutenção</h2>
         <ul class="l">
@@ -174,7 +174,7 @@
       <h2>Galeria » Fotos de Campo &amp; Evidências</h2>
       <div class="in">
         <h2 class="big">Evidências Técnicas de Bancada</h2>
-        <p>Registros de diagnósticos e reparos em laboratório (clique para ampliar):</p>
+        <p>Registros de diagnósticos e reparos em laboratório:</p>
         <div class="field-photos-grid">
           <div class="photo-card" onclick="openModal('assets/evidence/reparo-placa-smartphone.jpeg', '[01] Reparo de Placa de Smartphone')" onmouseenter="playHoverSound()">
             <img src="assets/evidence/reparo-placa-smartphone.jpeg" alt="Reparo Smartphone" onerror="this.src='https://placehold.co/300x200/0a0612/05f2ff?text=Smartphone+Repair';">
@@ -248,18 +248,13 @@
         <div class="synthwave-player-container">
           <iframe id="youtubePlayer" width="100%" height="90" src="https://www.youtube-nocookie.com/embed/NZ4Of3lID84?enablejsapi=1" title="Karl Casey - Hackers" style="border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
         </div>
- <!-- Botões de Controle Neon Estilizados -->
-<div class="player-controls">
-  <button class="winamp-btn play-btn" onclick="playerAction('play')" onmouseenter="playHoverSound()">
-    ►
-  </button>
-  <button class="winamp-btn pause-btn" onclick="playerAction('pause')" onmouseenter="playHoverSound()">
-    ❚❚
-  </button>
-  <button class="winamp-btn replay-btn" onclick="playerAction('restart')" onmouseenter="playHoverSound()">
-    ◄◄
-  </button>
-</div>
+        <!-- Botões de Controle Neon Estilizados -->
+        <div class="player-controls">
+          <button class="winamp-btn play-btn" onclick="playerAction('play')" onmouseenter="playHoverSound()">►</button>
+          <button class="winamp-btn pause-btn" onclick="playerAction('pause')" onmouseenter="playHoverSound()">❚❚</button>
+          <button class="winamp-btn replay-btn" onclick="playerAction('restart')" onmouseenter="playHoverSound()">◄◄</button>
+        </div>
+      </div>
     </div>
 
     <!-- 2. Tamagotchi Retrô -->
@@ -277,19 +272,17 @@
       </div>
     </div>
 
-    <!-- 3. Assinatura de Visitas (Guestbook) -->
+    <!-- 3. Mural de Recados (Cbox Oficial Integrado) -->
     <div class="box widget-box" style="margin-bottom:6px">
       <h3>Mural de Recados</h3>
       <div class="in">
-        <div id="guestbookMessages" style="background: #000; border: 1px solid var(--cyan); height: 200px; overflow-y: auto; font-size: 13px; padding: 4px; margin-bottom: 4px;">
-          <div style="color: var(--yellow);">[Sistema]: Deixe seu recado!</div>
+        <div style="background: #000; border: 1px solid var(--cyan); height: 300px; padding: 2px; overflow: hidden;">
+          <iframe src="https://www3.cbox.ws/box/?boxid=3562048&boxtag=P7aIDI" width="100%" height="100%" allowtransparency="yes" allow="autoplay" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" title="Cbox Guestbook"></iframe>
         </div>
-        <input type="text" id="guestName" placeholder="Seu nome" style="width: 100%; background: #0a0612; color: #fff; border: 1px solid var(--pink); font-family: inherit; font-size: 14px; padding: 2px; margin-bottom: 3px;">
-        <textarea id="guestMsg" placeholder="Sua assinatura..." style="width: 100%; height: 35px; background: #0a0612; color: #fff; border: 1px solid var(--pink); font-family: inherit; font-size: 14px; padding: 2px; resize: none; margin-bottom: 3px;"></textarea>
-        <button class="btn" style="width: 100%; font-size: 15px; padding: 2px; margin: 0;" onclick="signGuestbook()" onmouseenter="playHoverSound()">Assinar Livro</button>
       </div>
     </div>
 
+    <!-- Contador de Visitas Local -->
     <div class="box">
       <h3>Contador de Visitas</h3>
       <div class="in">
@@ -345,7 +338,7 @@
     </div>
     <div style="display: flex; justify-content: space-between; align-items: center; padding: 4px;">
       <span style="font-size: 14px; color: var(--yellow);">Fonte: cybersecbrazil.com.br</span>
-      <a href="https://www.cybersecbrazil.com.br/" target="_blank" rel="noopener" class="btn" style="text-decoration: none; display: inline-block;">» Ir ao site oficial</a>
+      <a href="https://www.cybersecbrazil.com.br/" target="_blank" rel="noopener" class="btn" style="text-decoration: none; display: inline-block;" onmouseenter="playHoverSound()">» Ir ao site oficial</a>
     </div>
   </div>
 </div>
