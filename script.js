@@ -15,32 +15,35 @@ navButtons.forEach(btn => {
   });
 });
 
-// --- Contador de Visitantes com Persistência Local ---
+// --- Contador de Visitantes Real e Global via API ---
 function initVisitorCounter() {
   const countEl = document.getElementById('count');
   if (!countEl) return;
 
-  // Exibe o texto "LOAD..." enquanto processa a leitura
+  // Exibe o texto "LOAD..." enquanto aguarda a resposta da API
   countEl.textContent = 'LOAD...';
 
-  setTimeout(() => {
-    const COUNTER_KEY = 'mayumi_space_visitor_count';
-    const VISITED_SESSION_KEY = 'mayumi_space_visited_session';
-
-    let currentCount = parseInt(localStorage.getItem(COUNTER_KEY), 10);
-    
-    if (isNaN(currentCount)) {
-      currentCount = 1337; // Valor inicial estático retrô
-    }
-
-    if (!sessionStorage.getItem(VISITED_SESSION_KEY)) {
-      currentCount += 1;
-      localStorage.setItem(COUNTER_KEY, currentCount);
-      sessionStorage.setItem(VISITED_SESSION_KEY, 'true');
-    }
-
-    countEl.textContent = String(currentCount).padStart(6, '0');
-  }, 400);
+  // Usando um namespace único para o teu portfólio (podes alterar 'mayumi-space-portfolio' se quiseres)
+  fetch('https://api.countapi.xyz/hit/mayumi-space-portfolio/visits')
+    .then(res => res.json())
+    .then(data => {
+      if (data && typeof data.value !== 'undefined') {
+        // Formata o número real vindo do servidor com zeros à esquerda
+        countEl.textContent = String(data.value).padStart(6, '0');
+      } else {
+        throw new Error('Resposta inválida da API');
+      }
+    })
+    .catch(() => {
+      // Fallback caso a API falhe: usa o valor base local para o site nunca ficar sem número
+      const COUNTER_KEY = 'mayumi_space_visitor_count';
+      let currentCount = parseInt(localStorage.getItem(COUNTER_KEY), 10);
+      if (isNaN(currentCount)) {
+        currentCount = 1337;
+        localStorage.setItem(COUNTER_KEY, currentCount);
+      }
+      countEl.textContent = String(currentCount).padStart(6, '0');
+    });
 }
 
 // --- Modal 1: Imagem com Zoom ---
