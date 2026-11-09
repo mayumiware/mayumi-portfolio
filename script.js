@@ -15,7 +15,7 @@ navButtons.forEach(btn => {
   });
 });
 
-// --- Contador de Visitantes Real (CountAPI) ---
+// --- Contador de Visitantes Real (CounterAPI Estável) ---
 function initVisitorCounter() {
   const countEl = document.getElementById('count');
   if (!countEl) return;
@@ -23,18 +23,34 @@ function initVisitorCounter() {
   // Exibe o texto de carregamento retrô
   countEl.textContent = 'LOAD...';
 
-  fetch('https://api.countapi.xyz/hit/mayumi-portfolio/visits')
+  // Endpoint oficial e ativo da nova API de contagem
+  fetch('https://api.counterapi.dev/v1/mayumi-portfolio/visits/up')
     .then(res => res.json())
     .then(data => {
-      if (data && typeof data.value !== 'undefined') {
-        countEl.textContent = String(data.value).padStart(6, '0');
+      const visits = data.count !== undefined ? data.count : data.value;
+      if (typeof visits !== 'undefined') {
+        countEl.textContent = String(visits).padStart(6, '0');
       } else {
         throw new Error();
       }
     })
     .catch(() => {
-      // Fallback clássico caso a API caia momentaneamente
-      countEl.textContent = '001717';
+      // Fallback local inteligente: se a rede falhar, usa o localStorage do navegador
+      const COUNTER_KEY = 'mayumi_portfolio_visits';
+      let localCount = parseInt(localStorage.getItem(COUNTER_KEY), 10);
+      
+      if (isNaN(localCount)) {
+        localCount = 0; // Valor base inicial
+        localStorage.setItem(COUNTER_KEY, localCount);
+      } else {
+        const visitedSession = sessionStorage.getItem('mayumi_visited_session');
+        if (!visitedSession) {
+          localCount += 1;
+          localStorage.setItem(COUNTER_KEY, localCount);
+          sessionStorage.setItem('mayumi_visited_session', 'true');
+        }
+      }
+      countEl.textContent = String(localCount).padStart(6, '0');
     });
 }
 
