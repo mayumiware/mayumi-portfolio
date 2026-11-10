@@ -25,7 +25,6 @@
   <!-- Ticker Noticioso Retrô -->
   <div class="ticker">
     <span>*** Estudos em Ciência da Computação e Segurança Cibernética *** Manutenção de dispositivos eletrônicos *** Programação Web retrô ***</span>
-    <em id="clock">--:--:--</em>
   </div>
 
   <!-- Menu de Navegação, Perfil e Widget de Notícias (Esquerda) -->
@@ -51,22 +50,13 @@
       <h3>Cybersec Feed</h3>
       <div class="in">
         <p style="font-size: 14px; color: var(--yellow); margin-bottom: 4px;">Feed de <a href="https://www.cybersecbrazil.com.br/" target="_blank" rel="noopener">Cybersec Brazil</a>:</p>
-        <div class="synthwave-player-container" style="height: 220px; overflow: hidden; position: relative; background: #000;">
+        <div class="synthwave-player-container" style="height: 444px; overflow: hidden; position: relative; background: #000;">
           <iframe src="https://www.cybersecbrazil.com.br/" style="width: 220%; height: 220%; transform: scale(0.45); transform-origin: 0 0; border:0; background: #000;" title="Cybersec Brazil"></iframe>
         </div>
         <div style="display: flex; justify-content: space-between; margin-top: 6px; font-size: 13px;">
           <a href="#" onclick="openNewsModal(); return false;" onmouseenter="playHoverSound()">[ 🔍 Tela Cheia ]</a>
           <a href="https://www.cybersecbrazil.com.br/" target="_blank" rel="noopener" onmouseenter="playHoverSound()">» Site Oficial</a>
         </div>
-      </div>
-    </div>
-
-    <!-- Faculdades -->
-    <div class="box" style="margin-top: 6px; border: 1px solid var(--cyan);">
-      <h3>Faculdades</h3>
-      <div class="in" style="font-size: 16px;">
-        <div>• Ciência da Computação<br><small style="color: var(--cyan)">Univ. Farias Brito</small> <span class="tag">cursando</span></div>
-        <div style="margin-top:4px">• Cibersegurança<br><small style="color: var(--cyan)">Univ. de Fortaleza</small> <span class="tag">cursando</span></div>
       </div>
     </div>
 
@@ -88,14 +78,36 @@
 
         <hr style="border: 1px dashed var(--cyan); margin: 20px 0;">
 
-        <h3 style="color: var(--yellow);">// Habilidades</h3>
+        <h3 style="color: var(--yellow);">// Faculdades</h3>
+        <div class="grid" style="margin-bottom: 20px;">
+          <div class="card uni-card">
+            <svg class="uni-icon" viewBox="0 0 16 16" width="40" height="40" shape-rendering="crispEdges" fill="currentColor" role="img" aria-label="Ciência da Computação" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="14" height="11"/><rect x="3" y="3" width="10" height="7" fill="var(--bg)"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="8" y="8" width="4" height="1"/><rect x="7" y="12" width="2" height="2"/><rect x="4" y="14" width="8" height="1"/></svg>
+            <div class="uni-info">
+              <h3>Ciência da Computação</h3>
+              <p><small style="color: var(--cyan)">Univ. Farias Brito</small></p>
+              <span class="tag">cursando</span>
+            </div>
+          </div>
+          <div class="card uni-card">
+            <svg class="uni-icon" viewBox="0 0 16 16" width="40" height="40" shape-rendering="crispEdges" fill="currentColor" role="img" aria-label="Cibersegurança" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="1"/><rect x="1" y="2" width="14" height="1"/><rect x="1" y="3" width="14" height="1"/><rect x="1" y="4" width="14" height="1"/><rect x="1" y="5" width="14" height="1"/><rect x="1" y="6" width="14" height="1"/><rect x="1" y="7" width="14" height="1"/><rect x="2" y="8" width="12" height="1"/><rect x="2" y="9" width="12" height="1"/><rect x="3" y="10" width="10" height="1"/><rect x="4" y="11" width="8" height="1"/><rect x="5" y="12" width="6" height="1"/><rect x="6" y="13" width="4" height="1"/><rect x="7" y="14" width="2" height="1"/><rect x="7" y="4" width="2" height="1" fill="var(--bg)"/><rect x="6" y="5" width="4" height="2" fill="var(--bg)"/><rect x="7" y="7" width="2" height="3" fill="var(--bg)"/></svg>
+            <div class="uni-info">
+              <h3>Cibersegurança</h3>
+              <p><small style="color: var(--cyan)">Univ. de Fortaleza</small></p>
+              <span class="tag">cursando</span>
+            </div>
+          </div>
+        </div>
+
+        <hr style="border: 1px dashed var(--cyan); margin: 20px 0;">
+
+        <h3 style="color: var(--yellow);">// Principais habilidades</h3>
         <div class="grid" style="margin-bottom: 20px;">
           <div class="card">
             <h3>Hard Skills</h3>
             <ul class="l">
-              <li>Reparo de hardware e microeletrônica</li>
-              <li>Soldagem e eletrônica avançada</li>
-              <li>ExifTool básico</li>
+              <li>Reparo de hardware</li>
+              <li>Soldagem e eletrônica </li>
+              <li>Precisão e coordenação cirúrgica a reparos de pequenos objetos</li>
               <li>Python e MySQL básico</li>
             </ul>
           </div>
@@ -103,9 +115,9 @@
             <h3>Soft Skills</h3>
             <ul class="l">
               <li>Curiosidade e aprendizado contínuo</li>
-              <li>Precisão e persistência técnica</li>
-              <li>Adaptável e aprendizado rápido</li>
-              <li>Trabalho em equipe e comunicação</li>
+              <li>Resiliência e adaptação a novos desafios</li>
+              <li>Aprendizado rápido</li>
+              <li>Comunicação focada apenas no essencial</li>
             </ul>
           </div>
         </div>
@@ -131,6 +143,29 @@
             <img src="assets/evidence/reparo-socket-cpu.png" alt="Hobbie 4" onerror="this.src='https://placehold.co/300x200/170a2b/05f2ff?text=Hobbie+4';">
             <div class="photo-caption">[04] Precisão e persistência</div>
           </div>
+          <div class="photo-card" onclick="openModal('assets/evidence/oscilador_relogio_ponteiro.jpeg', '[05] Um mundo que você não enxerga à olho nu')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/oscilador_relogio_ponteiro.jpeg" alt="Hobbie 5" onerror="this.src='https://placehold.co/300x200/170a2b/05f2ff?text=Hobbie+5';">
+            <div class="photo-caption">[05] O outro mundo...</div>
+          </div>
+          <div class="photo-card" onclick="openModal('assets/evidence/a-arte-da-precisao-relojoeiro.jpeg', '[06] A arte da precisão')" onmouseenter="playHoverSound()">
+            <img src="assets/evidence/a-arte-da-precisao-relojoeiro.jpeg" alt="Hobbie 6" onerror="this.src='https://placehold.co/300x200/170a2b/05f2ff?text=Hobbie+6';">
+            <div class="photo-caption">[06] A arte da precisão</div>
+          </div>
+        </div>
+
+        <hr style="border: 1px dashed var(--cyan); margin: 20px 0;">
+
+        <h3 style="color: var(--yellow);">// Redes Sociais</h3>
+        <p>Me encontre por aqui:</p>
+        <div class="social-links">
+          <a class="social-btn" href="https://github.com/mayumiware" target="_blank" rel="noopener" onclick="playClickSound()" onmouseenter="playHoverSound()">
+            <svg class="social-icon" viewBox="0 0 16 16" width="32" height="32" shape-rendering="crispEdges" fill="currentColor" role="img" aria-label="GitHub" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="2" height="1"/><rect x="12" y="1" width="2" height="1"/><rect x="2" y="2" width="3" height="1"/><rect x="11" y="2" width="3" height="1"/><rect x="2" y="3" width="12" height="1"/><rect x="1" y="4" width="14" height="1"/><rect x="1" y="5" width="14" height="1"/><rect x="1" y="6" width="14" height="1"/><rect x="1" y="7" width="14" height="1"/><rect x="1" y="8" width="14" height="1"/><rect x="2" y="9" width="12" height="1"/><rect x="3" y="10" width="10" height="1"/><rect x="4" y="11" width="8" height="1"/><rect x="4" y="12" width="3" height="1"/><rect x="9" y="12" width="3" height="1"/><rect x="3" y="13" width="3" height="1"/><rect x="10" y="13" width="3" height="1"/><rect x="4" y="6" width="2" height="2" fill="var(--bg)"/><rect x="10" y="6" width="2" height="2" fill="var(--bg)"/><rect x="7" y="9" width="2" height="1" fill="var(--bg)"/></svg>
+            <span>GitHub</span>
+          </a>
+          <a class="social-btn" href="https://www.linkedin.com/in/c%C3%ADntia-mayumi-o-m-1b876a3b6/" target="_blank" rel="noopener" onclick="playClickSound()" onmouseenter="playHoverSound()">
+            <svg class="social-icon" viewBox="0 0 16 16" width="32" height="32" shape-rendering="crispEdges" fill="currentColor" role="img" aria-label="LinkedIn" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="0" width="12" height="1"/><rect x="1" y="1" width="14" height="1"/><rect x="0" y="2" width="16" height="1"/><rect x="0" y="3" width="16" height="1"/><rect x="0" y="4" width="16" height="1"/><rect x="0" y="5" width="16" height="1"/><rect x="0" y="6" width="16" height="1"/><rect x="0" y="7" width="16" height="1"/><rect x="0" y="8" width="16" height="1"/><rect x="0" y="9" width="16" height="1"/><rect x="0" y="10" width="16" height="1"/><rect x="0" y="11" width="16" height="1"/><rect x="0" y="12" width="16" height="1"/><rect x="0" y="13" width="16" height="1"/><rect x="1" y="14" width="14" height="1"/><rect x="2" y="15" width="12" height="1"/><rect x="3" y="3" width="2" height="2" fill="var(--bg)"/><rect x="3" y="6" width="2" height="7" fill="var(--bg)"/><rect x="7" y="6" width="2" height="7" fill="var(--bg)"/><rect x="9" y="6" width="4" height="2" fill="var(--bg)"/><rect x="11" y="8" width="2" height="5" fill="var(--bg)"/></svg>
+            <span>LinkedIn</span>
+          </a>
         </div>
       </div>
     </section>
@@ -231,28 +266,63 @@
 
   <!-- Barra Lateral Direita -->
   <aside>
-    <!-- Redes Sociais -->
-    <div class="box" style="margin-bottom:6px">
-      <h3>Redes Sociais</h3>
+    <!-- 1. Cassette Deck com player do YouTube integrado -->
+    <div class="box widget-box cassette-widget" style="margin-bottom:6px">
+      <h3>CASSETTE PLAYER</h3>
       <div class="in">
-        <p>• <a href="https://github.com/mayumiware" target="_blank" rel="noopener" onclick="playClickSound()" onmouseenter="playHoverSound()">GitHub</a></p>
-        <p>• <a href="https://www.linkedin.com/in/c%C3%ADntia-mayumi-o-m-1b876a3b6/" target="_blank" rel="noopener" onclick="playClickSound()" onmouseenter="playHoverSound()">LinkedIn</a></p>
-      </div>
-    </div>
 
-    <!-- 1. Player MP3 Clássico -->
-    <div class="box widget-box" style="margin-bottom:6px">
-      <h3>MP3 Player</h3>
-      <div class="in">
-        <p style="font-size: 14px; margin-bottom: 4px; color: var(--yellow);">» Trilha Sonora: "Hackers" por Karl Casey @ White Bat Audio</p>
-        <div class="synthwave-player-container">
-          <iframe id="youtubePlayer" width="100%" height="90" src="https://www.youtube-nocookie.com/embed/NZ4Of3lID84?enablejsapi=1" title="Karl Casey - Hackers" style="border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        </div>
-        <!-- Botões de Controle Neon Estilizados -->
-        <div class="player-controls">
-          <button class="winamp-btn play-btn" onclick="playerAction('play')" onmouseenter="playHoverSound()">►</button>
-          <button class="winamp-btn pause-btn" onclick="playerAction('pause')" onmouseenter="playHoverSound()">❚❚</button>
-          <button class="winamp-btn replay-btn" onclick="playerAction('restart')" onmouseenter="playHoverSound()">◄◄</button>
+        <div class="cassette-deck" id="cassetteDeck">
+          <div class="cassette-deck-topline">
+            <span>MW-80</span>
+            <span class="cassette-led" id="cassetteLed" aria-hidden="true"></span>
+          </div>
+
+          <div class="cassette-screen-panel">
+            <div class="cassette-screen-heading">
+              <span>NOW PLAYING</span>
+              <strong>HACKERS</strong>
+              <span id="cassetteStatus" aria-live="polite">READY</span>
+            </div>
+            <div class="cassette-video-frame">
+              <iframe
+                id="youtubePlayer"
+                width="115"
+                height="130"
+                src="https://www.youtube-nocookie.com/embed/NZ4Of3lID84?enablejsapi=1&playsinline=1&rel=0"
+                title="Karl Casey - Hackers | YouTube music player"
+                style="border:2;"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+          <div class="cassette-shell" role="img" aria-label="Ilustração de uma fita cassete retrô com duas bobinas">
+            <div class="cassette-label">
+              <span class="cassette-label-brand">WHITE BAT AUDIO</span>
+              <strong>HACKERS</strong>
+              <small>KARL CASEY · 5 MIN</small>
+            </div>
+            <div class="cassette-window">
+              <span class="tape-reel tape-reel-left"><i></i></span>
+              <span class="tape-ribbon"></span>
+              <span class="tape-reel tape-reel-right"><i></i></span>
+            </div>
+            <span class="cassette-screw screw-one"></span>
+            <span class="cassette-screw screw-two"></span>
+            <span class="cassette-screw screw-three"></span>
+            <span class="cassette-screw screw-four"></span>
+          </div>
+
+          <div class="player-controls cassette-controls" aria-label="Controles do tocador de fita">
+            <button class="transport-btn rewind-btn" type="button" onclick="playerAction('restart')" onmouseenter="playHoverSound()" aria-label="Voltar ao início" title="Rewind"><span class="transport-icon">↺</span><span></span></button>
+            <button class="transport-btn play-btn" type="button" onclick="playerAction('play')" onmouseenter="playHoverSound()" aria-label="Reproduzir" title="Play"><span class="transport-icon">►</span><span class="transport-label"></span></button>
+            <button class="transport-btn pause-btn" type="button" onclick="playerAction('pause')" onmouseenter="playHoverSound()" aria-label="Pausar" title="Pause"><span class="transport-icon">||</span><span class="transport-label"></span></button>
+          </div>
+
+          <button class="transport-btn ad-skip-btn" id="adSkipBtn" type="button" onclick="openAdSkipView()" onmouseenter="playHoverSound()" aria-haspopup="dialog" title="Amplia o player para você clicar em 'Pular anúncio' do YouTube">
+            <span class="transport-icon" aria-hidden="true">► ►</span><span>PULAR ANÚNCIO</span>
+          </button>
         </div>
       </div>
     </div>
@@ -260,21 +330,35 @@
     <!-- 2. Tamagotchi Retrô -->
     <div class="box widget-box" style="margin-bottom:6px">
       <h3>Tamagotchi</h3>
-      <div class="in" style="text-align: center;">
-        <div id="petScreen" style="background: #000; border: 2px solid var(--cyan); padding: 8px; font-size: 22px; color: var(--green, #05f2ff); margin-bottom: 6px; letter-spacing: 2px;">
-          <span id="petFace">(>^ω^<)</span> <br>
-          <span id="petStatus" style="font-size: 14px; color: var(--yellow);">Fome: 50% | Humor: 😀</span>
-        </div>
-        <div style="display: flex; gap: 4px; justify-content: center;">
-          <button class="btn" style="padding: 2px 6px; font-size: 16px; margin: 0;" onclick="feedPet()" onmouseenter="playHoverSound()">Alimentar</button>
-          <button class="btn" style="padding: 2px 6px; font-size: 16px; margin: 0;" onclick="playPet()" onmouseenter="playHoverSound()">Brincar</button>
+      <div class="in">
+        <div class="gotchi">
+          <div class="gotchi-brand">MW-GOTCHI</div>
+          <div class="gotchi-lcd" id="petScreen">
+            <div class="gotchi-stats" aria-hidden="true">
+              <div class="gotchi-stat"><span>FOME</span><div class="gotchi-bar" id="petHungerBar"></div></div>
+              <div class="gotchi-stat"><span>HUMOR</span><div class="gotchi-hearts" id="petHearts"></div></div>
+            </div>
+            <div class="gotchi-stage" id="petStage">
+              <div class="pet-sprite" id="petFace" role="img" aria-label="Bichinho virtual"></div>
+              <div class="pet-food" id="petFood" aria-hidden="true" hidden></div>
+            </div>
+            <div class="gotchi-caption" id="petStatus" aria-live="polite">Feliz</div>
+          </div>
+          <div class="gotchi-buttons">
+            <button type="button" class="gotchi-btn" onclick="feedPet()" onmouseenter="playHoverSound()">
+              <span class="gotchi-btn-cap" aria-hidden="true"></span><small>Alimentar</small>
+            </button>
+            <button type="button" class="gotchi-btn" onclick="playPet()" onmouseenter="playHoverSound()">
+              <span class="gotchi-btn-cap" aria-hidden="true"></span><small>Brincar</small>
+            </button>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- 3. Mural de Recados (Cbox Oficial Integrado) -->
     <div class="box widget-box" style="margin-bottom:6px">
-      <h3>Mural de Recados</h3>
+      <h3>Livro de assinaturas</h3>
       <div class="in">
         <div style="background: #000; border: 1px solid var(--cyan); height: 300px; padding: 2px; overflow: hidden;">
           <iframe src="https://www3.cbox.ws/box/?boxid=3562048&boxtag=P7aIDI" width="100%" height="100%" allowtransparency="yes" allow="autoplay" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" title="Cbox Guestbook"></iframe>
@@ -297,15 +381,36 @@
   </footer>
 </div>
 
-<!-- Assistente Virtual Flutuante -->
-<div id="floatingAssistant" class="floating-assistant">
-  <div class="assistant-header">
-    <span>Assistente Virtual</span>
-    <button class="assistant-toggle-btn" onclick="toggleAssistant()" title="Ocultar Assistente" onmouseenter="playHoverSound()">[ _ ]</button>
+<!-- Assistente Virtual (Mayu-Bot) -->
+<div id="virtualAssistant" class="va" data-h="right" data-v="up" hidden>
+  <div class="va-bubble" id="vaBubble" hidden>
+    <div class="va-bubble-head">
+      <span>MAYU-BOT // DICA</span>
+      <button type="button" class="va-min" id="vaMinimize" aria-label="Minimizar balão de fala" title="Minimizar" onmouseenter="playHoverSound()">[ _ ]</button>
+    </div>
+    <div class="va-bubble-body">
+      <p id="virtualAssistantText" aria-live="polite"></p>
+      <div class="va-actions">
+        <button type="button" class="btn" id="vaTip" onmouseenter="playHoverSound()">Nova dica</button>
+        <button type="button" class="btn va-hide" id="vaHide" onmouseenter="playHoverSound()">Esconder</button>
+      </div>
+    </div>
   </div>
-  <div class="assistant-body">
-    <div id="virtualAssistantText">🤖 "Olá! Clique nos botões para explorar o portfólio da Mayumi!"</div>
-    <button class="btn" style="width: 100%; font-size: 14px; padding: 2px; margin-top: 6px;" onclick="assistantTip()" onmouseenter="playHoverSound()">Nova Dica</button>
+  <button type="button" class="va-mascot" id="vaMascot" aria-label="Assistente virtual Mayu-Bot. Clique para abrir ou fechar o balão; arraste para mover." title="Clique para conversar · arraste para mover">
+    <svg class="va-sprite" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><rect class="va-led" x="7" y="0" width="2" height="2" fill="var(--yellow)"/><rect x="7" y="2" width="2" height="1" fill="var(--cyan)"/><rect x="1" y="5" width="1" height="3" fill="var(--pink)"/><rect x="14" y="5" width="1" height="3" fill="var(--pink)"/><rect x="2" y="3" width="12" height="8" fill="var(--cyan)"/><rect x="3" y="4" width="10" height="6" fill="var(--bg)"/><rect class="va-eye" x="5" y="5" width="2" height="2" fill="var(--yellow)"/><rect class="va-eye" x="9" y="5" width="2" height="2" fill="var(--yellow)"/><rect class="va-mouth" x="6" y="8" width="4" height="1" fill="var(--pink)"/><rect x="6" y="11" width="4" height="1" fill="var(--violet)"/><rect x="3" y="12" width="10" height="4" fill="var(--pink)"/><rect x="6" y="13" width="4" height="2" fill="var(--yellow)"/><rect x="7" y="13" width="2" height="1" fill="var(--bg)"/><rect x="1" y="12" width="2" height="3" fill="var(--cyan)"/><rect x="13" y="12" width="2" height="3" fill="var(--cyan)"/></svg>
+    <span class="va-dot" id="vaDot" hidden aria-hidden="true">!</span>
+  </button>
+</div>
+<button type="button" class="va-call" id="vaCall" hidden onmouseenter="playHoverSound()">
+  <svg class="va-call-icon" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><rect class="va-led" x="7" y="0" width="2" height="2" fill="var(--yellow)"/><rect x="7" y="2" width="2" height="1" fill="var(--cyan)"/><rect x="1" y="5" width="1" height="3" fill="var(--pink)"/><rect x="14" y="5" width="1" height="3" fill="var(--pink)"/><rect x="2" y="3" width="12" height="8" fill="var(--cyan)"/><rect x="3" y="4" width="10" height="6" fill="var(--bg)"/><rect class="va-eye" x="5" y="5" width="2" height="2" fill="var(--yellow)"/><rect class="va-eye" x="9" y="5" width="2" height="2" fill="var(--yellow)"/><rect class="va-mouth" x="6" y="8" width="4" height="1" fill="var(--pink)"/><rect x="6" y="11" width="4" height="1" fill="var(--violet)"/><rect x="3" y="12" width="10" height="4" fill="var(--pink)"/><rect x="6" y="13" width="4" height="2" fill="var(--yellow)"/><rect x="7" y="13" width="2" height="1" fill="var(--bg)"/><rect x="1" y="12" width="2" height="3" fill="var(--cyan)"/><rect x="13" y="12" width="2" height="3" fill="var(--cyan)"/></svg>
+  <span>Chamar assistente</span>
+</button>
+
+<!-- Player ampliado (para pular anúncios do YouTube) -->
+<div id="adOverlay" class="ad-overlay" role="dialog" aria-label="Player ampliado" hidden onclick="closeAdSkipViewOnOuterClick(event)">
+  <div class="ad-overlay-bar">
+    <span>Se houver anúncio, clique em <b>"Pular anúncio"</b> no canto do vídeo quando ele aparecer.</span>
+    <button type="button" class="btn" id="adCloseBtn" onclick="closeAdSkipView()" onmouseenter="playHoverSound()">[ Fechar ]</button>
   </div>
 </div>
 
@@ -328,15 +433,15 @@
 
 <!-- Modal 2: News Reader (Cybersec Brazil) -->
 <div id="newsModal" class="retro-modal" onclick="closeNewsModalOnOuterClick(event)">
-  <div class="modal-box" style="max-width: 800px;">
+  <div class="modal-box news-box" style="max-width: 800px;">
     <div class="modal-header">
       <span>// NEWS_READER.EXE - Cybersec Brazil Feed</span>
-      <span class="modal-close" onclick="closeNewsModal()" onmouseenter="playHoverSound()">[ X ]</span>
+      <button type="button" class="modal-close" onclick="closeNewsModal()" onmouseenter="playHoverSound()" aria-label="Fechar notícias">[ X ]</button>
     </div>
-    <div style="padding: 8px; background: #000; border: 2px solid var(--cyan); margin: 8px 0;">
-      <iframe src="https://www.cybersecbrazil.com.br/" style="width: 100%; height: 450px; border: 0;" title="Cybersec Brazil Full Feed"></iframe>
+    <div class="news-frame">
+      <iframe src="https://www.cybersecbrazil.com.br/" style="border: 0;" title="Cybersec Brazil Full Feed"></iframe>
     </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; padding: 4px;">
+    <div class="news-footer">
       <span style="font-size: 14px; color: var(--yellow);">Fonte: cybersecbrazil.com.br</span>
       <a href="https://www.cybersecbrazil.com.br/" target="_blank" rel="noopener" class="btn" style="text-decoration: none; display: inline-block;" onmouseenter="playHoverSound()">» Ir ao site oficial</a>
     </div>
