@@ -15,43 +15,92 @@ navButtons.forEach(btn => {
   });
 });
 
-// --- Relógio em Tempo Real no Ticker ---
-function updateClock() {
-  const clockEl = document.getElementById('clock');
-  if (clockEl) {
-    const now = new Date();
-    clockEl.textContent = now.toTimeString().split(' ')[0];
-  }
+
+// =============================================
+// CONTADOR GLOBAL DE VISITAS - MAYUMI PORTFOLIO
+// API: Count API
+// =============================================
+
+const VISITOR_API_KEY = 'mayumi_portfolio_visits_2026_8f2c9d71';
+
+const VISITOR_SESSION_KEY = 'mayumi_portfolio_counted_session';
+
+async function initVisitorCounter() {
+
+    const countEl = document.getElementById('count');
+
+    if (!countEl) return;
+
+    // Não contabilizar testes locais
+    if (
+        location.hostname === 'localhost' ||
+        location.hostname === '127.0.0.1'
+    ) {
+        countEl.textContent = 'TESTE';
+        return;
+    }
+
+    countEl.textContent = 'LOAD...';
+
+    try {
+
+        // Verifica se esta sessão já foi contabilizada
+        const alreadyCounted =
+            sessionStorage.getItem(VISITOR_SESSION_KEY) === 'true';
+
+        // Define o endpoint
+        const endpoint = alreadyCounted ? 'get' : 'hit';
+
+        const apiURL =
+            `https://countapi.mileshilliard.com/api/v1/${endpoint}/${VISITOR_API_KEY}`;
+
+        // Consulta ou registra a visita
+        const response = await fetch(apiURL, {
+            method: 'GET',
+            cache: 'no-store'
+        });
+
+        if (!response.ok) {
+            throw new Error(`API retornou HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        const totalVisits = Number(data.value);
+
+        if (!Number.isFinite(totalVisits)) {
+            throw new Error('Resposta inválida da API.');
+        }
+
+        // Marca a sessão como contabilizada
+        if (!alreadyCounted) {
+            sessionStorage.setItem(VISITOR_SESSION_KEY, 'true');
+        }
+
+        // Exibe o total global
+        countEl.textContent = String(totalVisits).padStart(6, '0');
+
+    } catch (error) {
+
+        console.error('Erro no contador global:', error);
+
+        countEl.textContent = 'OFFLINE';
+
+    }
 }
-setInterval(updateClock, 1000);
-updateClock();
 
-// --- Contador de Visitas Local Robusto ("Hurry" / Storage) ---
-function initVisitorCounter() {
-  const countEl = document.getElementById('count');
-  if (!countEl) return;
+// Inicialização
+if (document.readyState === 'loading') {
 
-  countEl.textContent = 'LOAD...';
+    document.addEventListener(
+        'DOMContentLoaded',
+        initVisitorCounter
+    );
 
-  setTimeout(() => {
-    const COUNTER_KEY = 'mayumi_portfolio_total_visits';
-    const SESSION_KEY = 'mayumi_portfolio_session_active';
+} else {
 
-    let visits = parseInt(localStorage.getItem(COUNTER_KEY), 10);
+    initVisitorCounter();
 
-    if (isNaN(visits)) {
-      visits = 1420;
-      localStorage.setItem(COUNTER_KEY, visits);
-    }
-
-    if (!sessionStorage.getItem(SESSION_KEY)) {
-      visits += 1;
-      localStorage.setItem(COUNTER_KEY, visits);
-      sessionStorage.setItem(SESSION_KEY, 'true');
-    }
-
-    countEl.textContent = String(visits).padStart(6, '0');
-  }, 300);
 }
 
 // --- Modal 1: Imagem com Zoom (Com Som Integrado) ---
