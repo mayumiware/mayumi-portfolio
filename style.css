@@ -40,11 +40,10 @@ body {
   background-image: 
     radial-gradient(circle at 20% 10%, #3a0a4a55, transparent 50%),
     radial-gradient(circle at 85% 90%, #00e5ff22, transparent 45%);
-  cursor: url('assets/profile/cursor-synthwave.png'), auto;
 }
 
-a, button, .photo-card, .avatar-box, .modal-close, .modal-zoom-btn, input, textarea {
-  cursor: url('assets/profile/cursor-hover.png'), pointer;
+button, .photo-card, .avatar-box, .modal-close, .modal-zoom-btn {
+  cursor: pointer;
 }
 
 body.vhs::after {
@@ -276,30 +275,6 @@ ul.l li::marker { color: var(--pink); }
   gap: 6px;
   margin-top: 6px;
 }
-.winamp-btn {
-  flex: 1;
-  background: linear-gradient(180deg, #170a2b 0%, #0a0612 100%);
-  color: var(--yellow);
-  border: 2px solid var(--cyan);
-  font-family: 'VT323', monospace;
-  font-size: 18px;
-  font-weight: bold;
-  padding: 8px 2px;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  box-shadow: 3px 3px 0 var(--pink);
-  cursor: pointer;
-  transition: all 0.15s ease-in-out;
-}
-.winamp-btn:hover {
-  background: var(--pink);
-  color: #fff;
-  border-color: var(--yellow);
-  box-shadow: 3px 3px 0 var(--cyan), 0 0 10px var(--pink);
-  transform: translateY(-2px);
-}
-
 /* Assistente Virtual (Mayu-Bot) */
 .va {
   --va-size: 96px;
@@ -328,10 +303,9 @@ ul.l li::marker { color: var(--pink); }
 .va-mascot:focus-visible, .va-call:focus-visible, .va-bubble button:focus-visible { outline: 2px dashed var(--yellow); outline-offset: 2px; }
 .va-sprite { display: block; width: 100%; height: 100%; animation: va-bob 1.6s steps(2) infinite; }
 .va.is-moving .va-sprite { animation: va-hop .3s steps(2) infinite; }
-.va[data-facing="left"] .va-sprite { transform: scaleX(-1); }
 @keyframes va-bob { 50% { transform: translateY(-4px); } }
 @keyframes va-hop { 50% { transform: translateY(-10px); } }
-.va[data-facing="left"] .va-sprite { animation-name: va-bob-flip; }
+.va[data-facing="left"] .va-sprite { transform: scaleX(-1); animation-name: va-bob-flip; }
 .va[data-facing="left"].is-moving .va-sprite { animation-name: va-hop-flip; }
 @keyframes va-bob-flip { 0%,100% { transform: scaleX(-1); } 50% { transform: scaleX(-1) translateY(-4px); } }
 @keyframes va-hop-flip { 0%,100% { transform: scaleX(-1); } 50% { transform: scaleX(-1) translateY(-10px); } }
@@ -418,6 +392,8 @@ footer { grid-area: foot; text-align: center; padding: 6px; color: var(--pink); 
   align-items: center;
   justify-content: center;
   padding: 15px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 .modal-box {
   background: var(--panel);
@@ -445,7 +421,7 @@ footer { grid-area: foot; text-align: center; padding: 6px; color: var(--pink); 
   margin-right: 10px;
 }
 .modal-zoom-btn:hover { color: var(--cyan); text-shadow: 0 0 6px var(--cyan); }
-.modal-close { cursor: pointer; color: var(--yellow); }
+.modal-close { color: var(--yellow); background: none; border: 0; font: inherit; padding: 0 4px; white-space: nowrap; flex: none; }
 
 .modal-img-container {
   position: relative;
@@ -491,18 +467,8 @@ body.vhs .modal-img-container::after {
   .va-call span { display: none; }
   .va-call { padding: 4px; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .sun, .floor, .ticker span, body.vhs::after, header h1 { animation: none; }
-  .ticker span { padding-left: 0; }
-}
 
 /* Cassette Deck — controles integrados ao painel frontal */
-.cassette-track-info {
-  margin: 0 0 8px;
-  color: var(--yellow);
-  font-size: 14px;
-  line-height: 1.2;
-}
 .cassette-deck {
   box-sizing: border-box;
   width: 100%;
@@ -744,10 +710,6 @@ body.vhs .modal-img-container::after {
   .cassette-controls { gap: 5px; }
   .transport-btn { min-height: 40px; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .cassette-deck.is-playing .tape-reel,
-  .cassette-deck.is-playing .cassette-led { animation: none; }
-}
 
 /* --- Redes Sociais (Sobre mim) --- */
 .social-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
@@ -773,10 +735,6 @@ body.vhs .modal-img-container::after {
 .uni-card .uni-info h3 { margin: 0 0 2px; }
 .uni-card .uni-info p { margin: 0 0 4px; }
 .uni-card:hover .uni-icon { color: var(--cyan); }
-@media (prefers-reduced-motion: reduce) {
-  .va, .va.is-entering, .va.is-leaving { transition: none; animation: none; }
-  .va-sprite, .va-eye, .va-led, .va-dot, .va.is-talking .va-mouth, .va.is-moving .va-sprite { animation: none; }
-}
 
 /* --- Tamagotchi --- */
 .gotchi {
@@ -852,11 +810,6 @@ body.vhs .modal-img-container::after {
 .gotchi-btn:active .gotchi-btn-cap { transform: translateY(3px); box-shadow: 0 1px 0 #000; }
 .gotchi-btn:focus-visible { outline: 2px dashed var(--yellow); outline-offset: 3px; }
 
-@media (prefers-reduced-motion: reduce) {
-  .pet-sprite, .pet-sprite svg, .pet-sprite .confetti, .pet-sprite .chew, .gotchi-bar.is-low i.on { animation: none; }
-  .pet-food { animation-duration: .01s; }
-}
-
 /* --- Pular anúncio (player ampliado) --- */
 .ad-skip-btn {
   width: 100%; min-height: 32px; margin-top: 8px;
@@ -881,11 +834,8 @@ body.vhs .modal-img-container::after {
   width: min(92vw, 720px); height: auto; aspect-ratio: 16 / 9; max-height: 80vh;
   border: 3px solid var(--yellow); box-shadow: 0 0 24px var(--pink);
 }
-@media (prefers-reduced-motion: reduce) { .ad-skip-btn.is-alert { animation: none; } }
 
 /* --- Modal de notícias: cabeçalho (X) sempre visível, inclusive em telas baixas --- */
-.retro-modal { overflow-y: auto; overscroll-behavior: contain; }
-.modal-close { background: none; border: 0; font: inherit; padding: 0 4px; white-space: nowrap; flex: none; }
 .news-box { display: flex; flex-direction: column; max-height: calc(100vh - 30px); max-height: calc(100dvh - 30px); }
 .news-box .modal-header { flex: none; align-items: center; }
 .news-frame { flex: 1 1 auto; min-height: 0; display: flex; padding: 8px; background: #000; border: 2px solid var(--cyan); margin: 8px 0; }
@@ -897,3 +847,28 @@ body.vhs .modal-img-container::after {
   .news-frame iframe { flex: 1 1 auto; height: auto; min-height: 160px; }
   .modal-close { min-width: 44px; min-height: 36px; padding: 4px 10px; }
 }
+
+/* Movimento reduzido (preferência do sistema) */
+@media (prefers-reduced-motion: reduce) {
+  .sun, .floor, .ticker span, body.vhs::after, header h1 { animation: none; }
+  .ticker span { padding-left: 0; }
+  .cassette-deck.is-playing .tape-reel,
+  .cassette-deck.is-playing .cassette-led { animation: none; }
+  .va, .va.is-entering, .va.is-leaving { transition: none; animation: none; }
+  .va-sprite, .va-eye, .va-led, .va-dot, .va.is-talking .va-mouth, .va.is-moving .va-sprite { animation: none; }
+  .pet-sprite, .pet-sprite svg, .pet-sprite .confetti, .pet-sprite .chew, .gotchi-bar.is-low i.on { animation: none; }
+  .pet-food { animation-duration: .01s; }
+  .ad-skip-btn.is-alert { animation: none; }
+}
+
+/* --- Habilidades em ícones --- */
+.skill-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.skill {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 8px 4px; background: var(--bg);
+  border: 2px solid var(--cyan); text-align: center; line-height: 1.05; font-size: 18px;
+}
+.skill-icon { width: 40px; height: 40px; color: var(--yellow); }
+.skill:hover { border-color: var(--pink); box-shadow: 3px 3px 0 var(--pink); transform: translate(-1px, -1px); }
+.skill:hover .skill-icon { color: var(--cyan); }
+
