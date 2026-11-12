@@ -157,6 +157,12 @@ const newsModal = document.getElementById('newsModal');
 
 function openNewsModal() {
   if (newsModal) {
+    // carrega o site de notícias só na primeira abertura
+    const newsFrame = newsModal.querySelector('iframe[data-src]');
+    if (newsFrame && !newsFrame.getAttribute('src')) {
+      newsFrame.src = newsFrame.dataset.src;
+    }
+
     newsModal.style.display = 'flex';
     playClickSound();
   }
@@ -357,6 +363,8 @@ function createYouTubePlayer() {
   }
 
   youtubePlayerInstance = new YT.Player('youtubePlayer', {
+    // mesmo domínio do iframe (youtube-nocookie) evita o aviso de postMessage
+    host: 'https://www.youtube-nocookie.com',
     events: {
 
       onReady: () => {
@@ -798,7 +806,7 @@ const vaSectionTips = {
   sobre: 'Esta é a página inicial! Aqui tem faculdades, habilidades, mural, redes sociais e entre outras subseções.',
   cursos: 'Esta seção mostra os cursos que a Mayumi fez e quais certificações ela possui.',
   experiencias: 'Esta seção mostra as experiências profissionais da Mayumi, incluindo estágios e trabalhos voluntários.',
-  fotos: 'Clique em qualquer foto para ampliar com zoom!',
+  fotos: 'Esta seção contém registros de experiências e jornadas técnicas',
   projetos: 'Seção de projetos! Aqui você pode ver os trabalhos que a Mayumi desenvolveu, incluindo sites, aplicativos e outros projetos interessantes.'
 };
 
